@@ -1,7 +1,8 @@
 import React from 'react';
 import './DataFlowChart.css';
 import { ISoftwareComponent } from '../Models/SoftwareComponent/ISoftwareComponent';
-import { SoftwareComponent } from '../Models/FlowChart.ts/SoftwareComponent';
+import { SoftwareComponent as SoftwareComponentModel } from '../Models/FlowChart.ts/SoftwareComponent';
+import {SoftwareComponent} from '../SoftwareComponent/SoftwareComponent';
 import { Operation } from '../Models/Node/Operation';
 import { Position } from '../Models/Position/Position';
 import { Datum } from '../Models/Edge/Datum';
@@ -10,7 +11,25 @@ import { isNode } from '@babel/types';
 import { INode } from '../Models/Node/INode';
 
 class DataFlowChart extends React.Component {
-    
+    render(){
+        const components = [];
+
+        softwareComponents.forEach((component) =>{
+            components.push(
+                <SoftwareComponent
+                    component={component}
+                    key={component.rank}
+                ></SoftwareComponent>
+            );
+        })
+        
+        return(
+            <div className="componentContainer">
+                {softwareComponents}
+            </div>
+        );
+
+    }
 }
 
 const worker: INode = new Operation(1, new Position(10, 10), "Worker");
@@ -25,7 +44,7 @@ const workplaces: INode = new Operation(9, new Position(10, 10), "Workplaces");
 
 
 const softwareComponents: Array<ISoftwareComponent> = [
-   new SoftwareComponent(1, 'Location', [
+   new SoftwareComponentModel(1, 'Location', [
        worker,
        workerLocations,
        filter,
@@ -39,8 +58,13 @@ const softwareComponents: Array<ISoftwareComponent> = [
    ],[
        new Datum("WorkerId", PrivacyLevels.PUBLIC, supervisor, filter),
        new Datum("WorkplaceId", PrivacyLevels.PUBLIC, supervisor, filter1),
-       new Datum("WorkerLocation", PrivacyLevels.PRIVATE, worker, workerLocations),
-       new Datum("WorkerLocation[]", PrivacyLevels.PRIVATE, workerLocations, filter),
-       new Datum("WorkerLocation", PrivacyLevels.SENSITIVE, filter, project)
+       new Datum("WorkerLocation", PrivacyLevels.SENSITIVE, worker, workerLocations),
+       new Datum("WorkerLocation[]", PrivacyLevels.SENSITIVE, workerLocations, filter),
+       new Datum("WorkerLocation", PrivacyLevels.SENSITIVE, filter, project),
+       new Datum("Location", PrivacyLevels.SENSITIVE, project, calcDist),
+       new Datum("Workplace[]", PrivacyLevels.PUBLIC, workplaces, filter1),
+       new Datum("Workplace", PrivacyLevels.PUBLIC, filter1, project1),
+       new Datum("Location", PrivacyLevels.PUBLIC, project1, calcDist),
+       new Datum("Distance", PrivacyLevels.PRIVATE, calcDist, supervisor)
    ])
-]
+];
