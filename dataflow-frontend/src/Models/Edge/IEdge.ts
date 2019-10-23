@@ -9,4 +9,5 @@ export interface IDatum{
 export interface IEdge{
     from: INode;
     to: INode;
+    id: number;
 }

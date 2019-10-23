@@ -1,19 +1,26 @@
 import React from 'react';
 import './Edge.css';
 import { IPosition } from '../Models/Position/IPosition';
+import { IEdge } from '../Models/Edge/IEdge';
 
 type EdgeProps = {
-    startPosition: IPosition,
-    endPosition: IPosition
+    datum: IEdge,
+    key: number
 }
 
-const Edge : React.FC<EdgeProps> = ({startPosition, endPosition}) => {
+const Edge: React.FC<EdgeProps> = ({ datum, key }) => {
+
+
+
     return (
-        <div>
+        /**TODO */
 
+        <div>
         </div>
-    );;
-    
+    );
+
 }
+
+
 
 export default Edge;

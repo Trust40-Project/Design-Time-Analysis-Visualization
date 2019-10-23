@@ -4,6 +4,9 @@ import { INode } from "../Node/INode";
 import { Operation } from "../Node/Operation";
 
 export class Datum implements IEdge, IDatum {
+     private static idCount: number = 0;
+    private _id: number = Datum.idCount;
+    
   private _name: string = 'Datum';
     
    private _privacyLevel: PrivacyLevels = PrivacyLevels.PRIVATE;
@@ -12,15 +15,25 @@ export class Datum implements IEdge, IDatum {
    
    private _to: INode = new Operation();
 
-   constructor(name: string = 'Datum', privacyLevel: PrivacyLevels= PrivacyLevels.PRIVATE, from: INode = new Operation(), to: INode = new Operation()){
-       this.name = name;
+   constructor(id: number = Datum.idCount, name: string = 'Datum', privacyLevel: PrivacyLevels= PrivacyLevels.PRIVATE, from: INode = new Operation(), to: INode = new Operation()){
+       
+        this.name = name;
        this.privacyLevel = privacyLevel;
        this.from = from;
        this.to = to;
+       this.id = id;
+       Datum.idCount ++;
    }
 
    public get name(): string {
     return this._name;
+}
+
+public get id(): number {
+    return this._id;
+}
+public set id(value: number) {
+    this._id = value;
 }
 public set name(value: string) {
     this._name = value;

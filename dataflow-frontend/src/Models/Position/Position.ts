@@ -6,6 +6,7 @@ export class Position implements IPosition{
 
     constructor(x: number, y: number){
         this.x = x;
+        this.y = y;
     }
 
     public get x(): number {

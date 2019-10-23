@@ -1,10 +1,9 @@
-import { ISoftwareComponent } from "../SoftwareComponent/ISoftwareComponent";
+import { ISoftwareComponent } from "./ISoftwareComponent";
 import { INode } from "../Node/INode";
-import { IFlowChart } from "./IFlowCHart";
 import { IEdge } from "../Edge/IEdge";
 import { Datum } from "../Edge/Datum";
 
-export class SoftwareComponent implements IFlowChart, ISoftwareComponent{
+export class SoftwareComponent implements ISoftwareComponent{
     private _edges: IEdge[] = [];
     private _rank: number = 0;    
     private _name: string = '';
