@@ -1,6 +1,6 @@
 import {IPosition} from './IPosition';
 
-class Position implements IPosition{
+export class Position implements IPosition{
     private _x: number = 0;
     private _y: number = 0;
 
