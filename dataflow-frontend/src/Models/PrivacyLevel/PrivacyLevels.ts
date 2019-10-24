@@ -1,5 +1,6 @@
 export enum PrivacyLevels{
     PUBLIC,
     PRIVATE,
-    SENSITIVE
+    SENSITIVE,
+    OFFICIAL
 }

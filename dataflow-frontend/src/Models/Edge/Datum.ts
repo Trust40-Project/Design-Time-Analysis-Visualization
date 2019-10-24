@@ -3,7 +3,7 @@ import { PrivacyLevels } from "../PrivacyLevel/PrivacyLevels";
 import { INode } from "../Node/INode";
 import { Operation } from "../Node/Operation";
 
-export class Datum implements IEdge, IDatum {
+export class Datum implements IDatum {
      private static idCount: number = 0;
     private _id: number = Datum.idCount;
     
