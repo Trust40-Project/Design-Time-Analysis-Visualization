@@ -23,8 +23,8 @@ export class Node extends React.Component<NodeProps> {
 
 
         return (
-            /**width: Node.width + 'vw', height: Node.height + 'vh', */
-            <div className='node' style={{ top: leftTopCorner.y + 'vh', left: leftTopCorner.x + 'vw'}}>{node.name}</div>
+            /**width: Node.width + 'vw', height: Node.height + 'vh', top: leftTopCorner.y + 'vh', left: leftTopCorner.x + 'vw'*/
+            <div className='node' style={{gridColumn: position.x+'/'+(position.x+1), gridRow: position.y + '/'+(position.y +1) }}>{node.name}</div>
         );
     }
 }

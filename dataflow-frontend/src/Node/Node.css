@@ -1,4 +1,8 @@
 .node{
     background-color: red;
-    position: relative;
+    padding: 10px;    
+    height: 5em;
+    width: 10em;
+    overflow: hidden;
+    box-sizing: border-box;
 }

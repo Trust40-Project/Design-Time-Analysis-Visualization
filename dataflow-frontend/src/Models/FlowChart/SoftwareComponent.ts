@@ -9,6 +9,7 @@ export class SoftwareComponent implements ISoftwareComponent{
     private _name: string = '';
     private _nodes: Array<INode> = [];
     
+    
 
     constructor(rank: number, name: string, nodes: Array<INode>, edges: Array<IEdge>){
         this.name = name;
@@ -16,6 +17,8 @@ export class SoftwareComponent implements ISoftwareComponent{
         this.nodes = nodes;
         this.edges = edges;
     }
+
+    
 
     public get edges(): IEdge[] {
         return this._edges;

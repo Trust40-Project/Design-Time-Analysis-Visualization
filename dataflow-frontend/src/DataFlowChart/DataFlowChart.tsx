@@ -31,16 +31,27 @@ export class DataFlowChart extends React.Component {
 
     }
 }
-
+/*
 const worker: INode = new Operation(1, new Position(40, 20), "Worker");
-const workerLocations: INode = new Operation(2, new Position(60, 20), "WorkerLocations");
+const workerLocations: INode = new Operation(2, new Position(60, 0), "WorkerLocations");
 const filter: INode = new Operation(3, new Position(60, 40), "filter");
 const project: INode = new Operation(4, new Position(40, 40), "project");
 const filter1: INode =  new Operation(5, new Position(60, 80), "filter");
 const project1: INode = new Operation(6, new Position(40, 80), "project");
 const calcDist: INode = new Operation(7, new Position(20, 60), "calcDist");
 const supervisor: INode = new Operation(8, new Position(80, 60), "Supervisor");
-const workplaces: INode = new Operation(9, new Position(60, 120), "Workplaces");
+const workplaces: INode = new Operation(9, new Position(60, 120), "Workplaces");*/
+
+const worker: INode = new Operation(1, new Position(2, 1), "Worker");
+const workerLocations: INode = new Operation(2, new Position(3, 1), "WorkerLocations");
+const filter: INode = new Operation(3, new Position(3, 2), "filter");
+const project: INode = new Operation(4, new Position(2, 2), "project");
+const filter1: INode =  new Operation(5, new Position(3, 4), "filter");
+const project1: INode = new Operation(6, new Position(2, 4), "project");
+const calcDist: INode = new Operation(7, new Position(1, 3), "calcDist");
+const supervisor: INode = new Operation(8, new Position(4, 3), "Supervisor");
+const workplaces: INode = new Operation(9, new Position(3, 5), "Workplaces");
+
 
 
 const softwareComponents: Array<ISoftwareComponent> = [

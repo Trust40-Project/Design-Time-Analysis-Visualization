@@ -1,4 +1,15 @@
 .softwarecomponent{
     background-color: orange;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4,  10em);
+    grid-template-rows: repeat(5, 5em);
+    grid-auto-columns: 10em;
+    grid-auto-rows: 5em;
+    gap: 0;
+    column-gap: 10em;
+    row-gap: 5em;
+    justify-items: center;
+    align-items: center;
+    width: calc((7) * 10em);
+    height: calc((9)*5em);
 }
