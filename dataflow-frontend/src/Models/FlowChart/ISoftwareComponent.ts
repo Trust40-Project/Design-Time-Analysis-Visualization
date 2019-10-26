@@ -1,8 +1,10 @@
-import { INode } from "../Node/INode";
+import { INode } from "../NGraph/INode";
 import { IFlowChart } from "./IFlowChart";
+import { IOperation } from "../Operation/IOperation";
 
 
-export interface ISoftwareComponent extends IFlowChart{
-    rank: number;
+export interface ISoftwareComponent{
+    id: number;
     name: string;
+    nodes:Array<INode<number, IOperation>>;
 }

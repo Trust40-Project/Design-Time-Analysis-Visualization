@@ -5,4 +5,5 @@
     width: 10em;
     overflow: hidden;
     box-sizing: border-box;
+    position: absolute;
 }

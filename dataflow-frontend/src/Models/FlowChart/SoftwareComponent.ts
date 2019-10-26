@@ -1,44 +1,38 @@
 import { ISoftwareComponent } from "./ISoftwareComponent";
-import { INode } from "../Node/INode";
-import { IEdge } from "../Edge/IEdge";
-import { Datum } from "../Edge/Datum";
+import { INode } from "../NGraph/INode";
+import { IOperation } from "../Operation/IOperation";
 
 export class SoftwareComponent implements ISoftwareComponent{
-    private _edges: IEdge[] = [];
-    private _rank: number = 0;    
+    private static idCount: number = 0;
+    private _id: number = SoftwareComponent.idCount;    
     private _name: string = '';
-    private _nodes: Array<INode> = [];
+    private _nodes: Array<INode<number, IOperation>> = [];
     
     
 
-    constructor(rank: number, name: string, nodes: Array<INode>, edges: Array<IEdge>){
+    constructor(id: number = SoftwareComponent.idCount, name: string='software component', nodes: Array<INode<number, IOperation>> = []){
         this.name = name;
-        this.rank = rank;
+        this.id = id;
         this.nodes = nodes;
-        this.edges = edges;
+        SoftwareComponent.idCount++;
     }
 
     
 
-    public get edges(): IEdge[] {
-        return this._edges;
-    }
-    public set edges(value: IEdge[]) {
-        this._edges = value;
-    }
+  
 
-    public get nodes(): Array<INode> {
+    public get nodes(): Array<INode<number, IOperation>> {
         return this._nodes;
     }
-    public set nodes(value: Array<INode>) {
+    public set nodes(value: Array<INode<number, IOperation>>) {
         this._nodes = value;
     }
 
-    public get rank(): number {
-        return this._rank;
+    public get id(): number {
+        return this._id;
     }
-    public set rank(value: number) {
-        this._rank = value;
+    public set id(value: number) {
+        this._id = value;
     }
 
 
