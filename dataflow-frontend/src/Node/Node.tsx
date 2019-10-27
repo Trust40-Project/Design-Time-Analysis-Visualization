@@ -33,11 +33,11 @@ export class Node extends React.Component<NodeProps> {
         const edges = this.props.graph.getLinks(node.id).filter( value => value.fromId === node.id);
         const toDisplay: JSX.Element[] = [];
         toDisplay.push(
-            <div className='node' key={node.id} style={{top: leftTopCorner.y + 'em', left:leftTopCorner.x +'em', zIndex:5}}>{node.data.name}</div>
+            <div className='node blur border' key={node.id} style={{top: leftTopCorner.y + 'em', left:leftTopCorner.x +'em', zIndex:5}}>{node.data.name}</div>
 
         );
 
-        edges.forEach(value => {console.dir(value);console.dir(node); toDisplay.push(<Edge from={layout.getNodePosition(value.fromId)} to={layout.getNodePosition(value.toId)} key={value.id}></Edge>)});
+        edges.forEach(value => toDisplay.push(<Edge from={layout.getNodePosition(value.fromId)} to={layout.getNodePosition(value.toId)} key={value.id}></Edge>));
             return toDisplay;
         /*
         return (

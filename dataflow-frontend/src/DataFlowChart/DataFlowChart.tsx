@@ -33,7 +33,7 @@ export class DataFlowChart extends React.Component {
         
         
         return(
-            <div className="componentContainer">
+            <div>
                 {components}
             </div>
         );

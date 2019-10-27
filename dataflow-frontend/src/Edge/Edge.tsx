@@ -23,7 +23,7 @@ const Edge: React.FC<EdgeProps> = ({ from, to, key }) => {
     return (
 
         <svg style={{position:"absolute", top: 0, left:0, width:"1em", height:"1em", overflow:"visible"}} viewBox="0 0 1 1">
-             <path style={{zIndex:0}}  d={"M "+(anchorPositions.from.x)+ " "+ (anchorPositions.from.y)+" L "+(anchorPositions.to.x) + " " +(anchorPositions.to.y)} stroke="black" strokeWidth="0.1" strokeLinecap="round" fill="none" ></path>
+             <path style={{zIndex:0}}  d={"M "+(anchorPositions.from.x)+ " "+ (anchorPositions.from.y)+" L "+(anchorPositions.to.x) + " " +(anchorPositions.to.y)} stroke="var(--color-border)" strokeWidth="0.1" strokeLinecap="round" fill="none" ></path>
         </svg>
     );
 

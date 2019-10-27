@@ -1,9 +1,8 @@
 .node{
-    background-color: red;
     padding: 10px;    
     height: 5em;
     width: 10em;
     overflow: hidden;
-    box-sizing: border-box;
     position: absolute;
+    border-radius: 5px;
 }
