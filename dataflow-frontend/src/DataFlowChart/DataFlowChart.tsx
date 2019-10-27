@@ -93,6 +93,7 @@ function createMockGraph(){
     var createGraph = require('ngraph.graph');
     var graph: IGraph<number, IOperation, IDatum> = createGraph();
     var softwareComponentLocation:ISoftwareComponent = new SoftwareComponentModel(undefined,'Location Service');
+
     var workerNode = graph.addNode(worker.id, worker);
     softwareComponentLocation.nodes.push(workerNode);
 
@@ -124,6 +125,7 @@ function createMockGraph(){
     graph.addLink(supervisor.id, filter.id, new Datum("WorkerId", PrivacyLevels.PUBLIC));
     graph.addLink(supervisor.id, filter1.id, new Datum("WorkplaceId", PrivacyLevels.PUBLIC));
     graph.addLink(worker.id, workerLocations.id,new Datum("WorkerLocation", PrivacyLevels.SENSITIVE) );
+    console.log(workerLocations.id +"-->"+filter.id);
     graph.addLink(workerLocations.id, filter.id,       new Datum("WorkerLocation[]", PrivacyLevels.SENSITIVE));
     graph.addLink(filter.id, project.id, new Datum("WorkerLocation", PrivacyLevels.SENSITIVE));
     graph.addLink(project.id, calcDist.id,new Datum("Location", PrivacyLevels.SENSITIVE) );

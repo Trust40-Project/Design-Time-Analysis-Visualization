@@ -21,8 +21,8 @@ type NodeProps = {
 }
 
 export class Node extends React.Component<NodeProps> {
-    static width: number = 10;
-    static height: number = 5;
+   public static width: number = 10;
+   public static height: number = 5;
     
 
     render(){
@@ -37,7 +37,7 @@ export class Node extends React.Component<NodeProps> {
 
         );
 
-        edges.forEach(value => {console.dir(value); toDisplay.push(<Edge from={layout.getNodePosition(value.fromId)} to={layout.getNodePosition(value.toId)} key={value.id}></Edge>)});
+        edges.forEach(value => {console.dir(value);console.dir(node); toDisplay.push(<Edge from={layout.getNodePosition(value.fromId)} to={layout.getNodePosition(value.toId)} key={value.id}></Edge>)});
             return toDisplay;
         /*
         return (
