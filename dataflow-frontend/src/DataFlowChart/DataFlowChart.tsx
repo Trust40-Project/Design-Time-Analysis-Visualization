@@ -16,9 +16,31 @@ import { FlowChart } from '../Models/FlowChart/FlowChart';
 import {IFlowChart} from '../Models/FlowChart/IFlowChart';
 import { ILayout } from '../Models/NGraph/ILayout';
 
-export class DataFlowChart extends React.Component {
+type DataFlowChartState = {
+    selectedNodeId: (number|undefined)
+}
+
+export class DataFlowChart extends React.Component<{},DataFlowChartState> {
+    constructor(props:Readonly<{}>){
+        super(props);
+        this.state = {
+            selectedNodeId: undefined
+
+        }
+
+        this.handleSelectedNodeChange = this.handleSelectedNodeChange.bind(this);
+        
+    }
+
+    handleSelectedNodeChange(nodeId: number){
+        this.setState({
+            selectedNodeId:(nodeId == this.state.selectedNodeId)?undefined: nodeId,
+        });
+    }
+
     render(){
         const components: JSX.Element[] = [];
+        const selectedNodeId = this.state.selectedNodeId;
         mockFlowChart.softwareComponents.forEach((component) =>{
             components.push(
                 <SoftwareComponent
@@ -26,6 +48,8 @@ export class DataFlowChart extends React.Component {
                     key={component.id}
                     layout={mockFlowChart.layout}
                     graph={mockFlowChart.graph}
+                    selectedNodeId={selectedNodeId}
+                    onSelectedNodeChange={this.handleSelectedNodeChange}
                 >
                 </SoftwareComponent>
             );

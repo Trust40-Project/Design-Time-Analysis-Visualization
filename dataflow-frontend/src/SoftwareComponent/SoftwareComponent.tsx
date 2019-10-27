@@ -13,7 +13,9 @@ type SoftwareComponentProps = {
     component: ISoftwareComponent,
     key: number,
     layout: ILayout<number, IOperation>,
-    graph: IGraph<number, IOperation, IDatum>
+    graph: IGraph<number, IOperation, IDatum>,
+    selectedNodeId: (number|undefined),
+    onSelectedNodeChange: (nodeId:number)=>void
 }
 
 export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
@@ -24,7 +26,14 @@ export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
        const graph = this.props.graph;
 
        const nodes = component.nodes.map((value: INode<number, IOperation>, index: number, array: INode<number, IOperation>[]) =>
-           <Node node={value} key={value.id} layout={layout} graph={graph}></Node>
+           <Node 
+                node={value} 
+                key={value.id} 
+                layout={layout} 
+                graph={graph} 
+                isSelected={this.props.selectedNodeId === value.id} 
+                onSelectedNodeChange={this.props.onSelectedNodeChange}
+            ></Node>
         );
 
         return nodes;

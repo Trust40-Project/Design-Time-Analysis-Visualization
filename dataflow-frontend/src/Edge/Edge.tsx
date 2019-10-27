@@ -9,21 +9,21 @@ import {Node} from '../Node/Node';
 type EdgeProps = {
     from: IPosition,
     to:IPosition,
-    key: string
+    nodeWidth: number,
+    nodeHeight: number,
+    key: number,
+    
 }
 
-const Edge: React.FC<EdgeProps> = ({ from, to, key }) => {
+const Edge: React.FC<EdgeProps> = ({ from, to,nodeWidth, nodeHeight, key }) => {
 
-    console.log("from -> to");
-    console.dir(from);
-    console.dir(to);
-    console.log("__");
-    const anchorPositions = getAnchorDirections(from, to);
+    
+    //const anchorPositions = getAnchorDirections(from, to, nodeWidth, nodeHeight);
 
     return (
 
         <svg style={{position:"absolute", top: 0, left:0, width:"1em", height:"1em", overflow:"visible"}} viewBox="0 0 1 1">
-             <path style={{zIndex:0}}  d={"M "+(anchorPositions.from.x)+ " "+ (anchorPositions.from.y)+" L "+(anchorPositions.to.x) + " " +(anchorPositions.to.y)} stroke="var(--color-border)" strokeWidth="0.1" strokeLinecap="round" fill="none" ></path>
+             <path style={{zIndex:0}}  d={"M "+(from.x)+ " "+ (from.y)+" L "+(to.x) + " " +(to.y)} stroke="var(--color-border)" strokeWidth="0.1" strokeLinecap="round" fill="none" ></path>
         </svg>
     );
 
@@ -36,7 +36,7 @@ const Edge: React.FC<EdgeProps> = ({ from, to, key }) => {
 export default Edge;
 
 
-function getAnchorDirections(from: IPosition, to: IPosition):IAnchorPosition {
-   const anchor:IAnchor = anchorFactory(from, to, Node.width, Node.height);
+function getAnchorDirections(from: IPosition, to: IPosition, width:number, height:number):IAnchorPosition {
+   const anchor:IAnchor = anchorFactory(from, to, width, height);
    return anchor.getAnchorPositions();
 }   

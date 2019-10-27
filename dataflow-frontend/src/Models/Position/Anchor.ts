@@ -7,25 +7,18 @@ export interface IAnchorPosition{
 }
 export function anchorFactory(from: IPosition, to:IPosition, width:number, height: number):IAnchor{
     const posAfterTranslation:IPosition = new Position(from.x - to.x, from.y-to.y);
-    console.log("anchor factory");
-    console.dir(from);
-    console.dir(to);
-    console.dir(posAfterTranslation);
+    
     if(posAfterTranslation.y <= -posAfterTranslation.x && posAfterTranslation.y > posAfterTranslation.x){
-        console.log("right left");
-        console.log("....");
+
         return new rightLeftAnchor(from, to, width, height);
     } else if(posAfterTranslation.y < -posAfterTranslation.x && posAfterTranslation.y <= posAfterTranslation.x){
-        console.log("bottom top");
-        console.log("....");
+        
         return new bottomTopAnchor(from, to,width, height);
     } else if(posAfterTranslation.y >= -posAfterTranslation.x && posAfterTranslation.y < posAfterTranslation.x){
-        console.log("left right");
-        console.log("....");
+        
         return new leftRightAnchor(from, to, width, height);
     } else{
-        console.log("top bottom");
-        console.log("....");
+        
         return new topBottomAnchor(from, to, width, height);
     }
     
