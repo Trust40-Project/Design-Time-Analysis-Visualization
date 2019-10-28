@@ -8,6 +8,7 @@ import { ILayout } from '../Models/NGraph/ILayout';
 import { IOperation } from '../Models/Operation/IOperation';
 import { IGraph } from '../Models/NGraph/IGraph';
 import { IDatum } from '../Models/Datum/IDatum';
+import { RevealEffect } from '../RevealEffect/RevealEffect';
 
 type SoftwareComponentProps = {
     component: ISoftwareComponent,
@@ -26,7 +27,7 @@ export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
        const graph = this.props.graph;
 
        const nodes = component.nodes.map((value: INode<number, IOperation>, index: number, array: INode<number, IOperation>[]) =>
-           <Node 
+            <Node
                 node={value} 
                 key={value.id} 
                 layout={layout} 
@@ -47,6 +48,9 @@ export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
     }*/
     render(){
        // const edges = this.renderEdges();
+       /*return <RevealEffect 
+        childrenToRender={this.renderNodes()}
+        ></RevealEffect>*/
         return this.renderNodes();
         
     }

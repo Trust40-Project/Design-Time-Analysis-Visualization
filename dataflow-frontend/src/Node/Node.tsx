@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import './Node.css'
 import { INode } from '../Models/NGraph/INode';
 import { IPosition } from '../Models/Position/IPosition';
@@ -12,6 +12,8 @@ import { JSXElement, identifier } from '@babel/types';
 import { ILink } from '../Models/NGraph/ILink';
 import { DataContainer } from '../DataContainer/DataContainer';
 import {Depths} from '@uifabric/fluent-theme/lib/fluent/FluentDepths'
+import { IRevealChild } from '../RevealEffect/RevealEffect';
+import { RevealEffectService } from '../RevealEffect/RevealEffectService';
 type NodeProps = {
     node: INode<number, IOperation>,
     key: number,
@@ -22,10 +24,11 @@ type NodeProps = {
 
 }
 
-type NodeState = {
+type NodeState  = {
     width: number,
     height: number
 }
+
 
 export class Node extends React.Component<NodeProps, NodeState> {
 
@@ -36,13 +39,28 @@ export class Node extends React.Component<NodeProps, NodeState> {
             height: this.props.isSelected ? 18 : 2.6,
         }
         this.handleSelectedNodeChange = this.handleSelectedNodeChange.bind(this);
+        //this.handleClickRipple = this.handleClickRipple.bind(this);
     }
 
 
-    handleSelectedNodeChange(event: MouseEvent<HTMLButtonElement>) {
-        this.props.onSelectedNodeChange(this.props.node.id);
-    }
+    handleSelectedNodeChange(event:React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+       /* const button =document.getElementById('node-button-'+this.props.node.id);
+        if(button){
+            event.target = button;
+                    this.handleClickRipple(event);
 
+        }
+        */
+       this.props.onSelectedNodeChange(this.props.node.id);
+    }
+/*
+    handleClickRipple(event:React.MouseEvent<HTMLButtonElement,MouseEvent>){
+       /* if(this.props.onClickRipple){
+            this.props.onClickRipple(event);
+        }*//*
+        RevealEffectService.getRevealEffectService().handleClickRipple(event);
+    }
+*/
 
     componentDidUpdate(prevProps: Readonly<NodeProps>, prevState: Readonly<NodeState>) {
         if (prevProps.isSelected !== this.props.isSelected) {
@@ -81,7 +99,7 @@ export class Node extends React.Component<NodeProps, NodeState> {
         return (
             <section>
                 <button tabIndex={node.id} onClick={this.handleSelectedNodeChange} className={cssClass + ' blur border'} style={{ top: leftTopCorner.y + 'em', left: leftTopCorner.x + 'em' }}>
-                    {this.renderNodeContent()}
+                        {this.renderNodeContent()}
                 </button>
                 {toDisplay}
             </section>
