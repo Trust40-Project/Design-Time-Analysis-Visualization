@@ -75,15 +75,15 @@ const calcDist: INode = new Operation(7, new Position(20, 60), "calcDist");
 const supervisor: INode = new Operation(8, new Position(80, 60), "Supervisor");
 const workplaces: INode = new Operation(9, new Position(60, 120), "Workplaces");*/
 
-const worker: IOperation = new Operation(undefined, "Worker");
-const workerLocations: IOperation = new Operation(undefined, "WorkerLocations");
+const worker: IOperation = new Operation(undefined, "worker");
+const workerLocations: IOperation = new Operation(undefined, "workerLocations");
 const filter: IOperation = new Operation(undefined, "filter");
 const project: IOperation = new Operation(undefined, "project");
 const filter1: IOperation =  new Operation(undefined, "filter");
 const project1: IOperation = new Operation(undefined, "project");
 const calcDist: IOperation = new Operation(undefined, "calcDist");
-const supervisor: IOperation = new Operation(undefined, "Supervisor");
-const workplaces: IOperation = new Operation(undefined, "Workplaces");
+const supervisor: IOperation = new Operation(undefined, "supervisor");
+const workplaces: IOperation = new Operation(undefined, "workplaces");
 
 const mockFlowChart: IFlowChart = createMockGraph();
 /*
@@ -146,17 +146,16 @@ function createMockGraph(){
     softwareComponentLocation.nodes.push(calcDisttNode);
 
 
-    graph.addLink(supervisor.id, filter.id, new Datum("WorkerId", PrivacyLevels.PUBLIC));
-    graph.addLink(supervisor.id, filter1.id, new Datum("WorkplaceId", PrivacyLevels.PUBLIC));
-    graph.addLink(worker.id, workerLocations.id,new Datum("WorkerLocation", PrivacyLevels.SENSITIVE) );
-    console.log(workerLocations.id +"-->"+filter.id);
-    graph.addLink(workerLocations.id, filter.id,       new Datum("WorkerLocation[]", PrivacyLevels.SENSITIVE));
-    graph.addLink(filter.id, project.id, new Datum("WorkerLocation", PrivacyLevels.SENSITIVE));
-    graph.addLink(project.id, calcDist.id,new Datum("Location", PrivacyLevels.SENSITIVE) );
-    graph.addLink(workplaces.id, filter1.id,new Datum("Workplace[]", PrivacyLevels.PUBLIC) );
-    graph.addLink(filter1.id, project1.id,new Datum("Workplace", PrivacyLevels.PUBLIC) );
-    graph.addLink(project1.id, calcDist.id, new Datum("Location", PrivacyLevels.PUBLIC));
-    graph.addLink(calcDist.id, supervisor.id,new Datum("Distance", PrivacyLevels.PRIVATE) );
+    graph.addLink(supervisor.id, filter.id, new Datum("workerId", PrivacyLevels.PUBLIC));
+    graph.addLink(supervisor.id, filter1.id, new Datum("workplaceId", PrivacyLevels.PUBLIC));
+    graph.addLink(worker.id, workerLocations.id,new Datum("workerLocation", PrivacyLevels.SENSITIVE) );
+    graph.addLink(workerLocations.id, filter.id,       new Datum("workerLocation[]", PrivacyLevels.SENSITIVE));
+    graph.addLink(filter.id, project.id, new Datum("worker Location", PrivacyLevels.SENSITIVE));
+    graph.addLink(project.id, calcDist.id,new Datum("location", PrivacyLevels.SENSITIVE) );
+    graph.addLink(workplaces.id, filter1.id,new Datum("workplace[]", PrivacyLevels.PUBLIC) );
+    graph.addLink(filter1.id, project1.id,new Datum("workplace", PrivacyLevels.PUBLIC) );
+    graph.addLink(project1.id, calcDist.id, new Datum("location", PrivacyLevels.PUBLIC));
+    graph.addLink(calcDist.id, supervisor.id,new Datum("distance", PrivacyLevels.PRIVATE) );
 
     var physicsSettings = {
         springLength: 10,
@@ -184,15 +183,15 @@ function createMockGraph(){
             smallesty = pos.y;
         }
       });
-      if(smallestx < 10 || smallesty < 10){
+      if(smallestx < 15 || smallesty < 15){
           graph.forEachNode(function (node) {
             var pos = layout.getNodePosition(node.id);
-              if(smallestx< 10){
-                  layout.setNodePosition(node.id,pos.x + Math.abs(smallestx)+10, pos.y );
+              if(smallestx< 15){
+                  layout.setNodePosition(node.id,pos.x + Math.abs(smallestx)+15, pos.y );
               }
               pos = layout.getNodePosition(node.id);
-              if(smallesty< 10){
-                layout.setNodePosition(node.id,pos.x, pos.y + Math.abs(smallesty) + 10); 
+              if(smallesty< 15){
+                layout.setNodePosition(node.id,pos.x, pos.y + Math.abs(smallesty) + 15); 
 
               }
           });

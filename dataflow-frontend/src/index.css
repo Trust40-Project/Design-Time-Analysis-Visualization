@@ -18,6 +18,11 @@ code {
   --color-reveal-highlight-center: rgba(255,255,255,1);
   --color-reveal-highlight-border: rgba(200,198,196,0.6);
   --font-family: '-apple-system, BlinkMacSystemFont, "Segoe UI Webfont", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif';
+  
+  --color-primary: #ffffff;
+  --color-secondary: #F3F2F1;
+  --color-tertiary: #D2D0CE;
+  --color-quaternary: #A19F9D;
   /*
     --color-border: #cacfd5;
     --color-base: #f4f5f6;
@@ -26,6 +31,11 @@ code {
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --color-primary: #1B1A19;
+     --color-secondary: #252423;
+    --color-tertiary: #3B3A39;
+    --color-quaternary: #797775;
+
     --color-background: #292827;
     --color-foreground: #1B1A19;
     --color-border: #484644;
@@ -46,7 +56,7 @@ code {
 }
 
 .blur{
-  background-color: var(--color-foreground);
+  background-color: var(--color-primary);
 }
 
 .border{
@@ -112,75 +122,94 @@ code {
 h1 {
   color: var(--color-text-default);
   font-family: var(--font-family);
-  font-size: 8em;
+  font-size: 2.625em;
+  line-height: 3.25em;
+  margin:0;
+
 }
 
 h2 {
   color: var(--color-text-default);
   font-family: var(--font-family);
-  font-size: 5em;
+  font-size: 2em;
+  line-height: 2.5em;
+  margin:0;
 }
 
 h3 {
   color: var(--color-text-default);
   font-family: var(--font-family);
-  font-size: 4em;
+  font-size: 1.75em;
+  line-height: 2.25em;
+  margin:0;
+
 }
 
 h4 {
   color: var(--color-text-default);
   font-family: var(--font-family);
-  font-size: 3em;
+  font-size: 1.5em;
+  line-height: 2em;
+  margin:0;
+
 }
 
 h5 {
   color: var(--color-text-default);
   font-family: var(--font-family);
-  font-size: 2em;
-  margin: 5px;
+  font-size: 1.25em;
+  line-height: 1.75em;
+  margin:0;
 }
 
 h6 {
   color: var(--color-text-default);
   font-family: var(--font-family);
-  font-size: 1.5em;
+  font-size: 1.125em;
+  line-height: 1.5em;
+  margin:0;
+
 }
 
 p {
   color: var(--color-text-default);
-  font-size: 1.3em;
+  font-size: 1em;
+  line-height: 1.375em;
   font-family: var(--font-family);
+  margin:0;
+
+  
 }
 
-pre {
-  color: var(--color-text-default);
-  font-size: 1.3em;
-  font-family: var(--font-family);
-}
 
-pre {
+pre { 
+   color: var(--color-text-default);
+
   display: inline;
   font-family: var(--font-family);
-  font-size: 1.3em;
-  white-space: pre-line;
+  font-size: 1em;
+  line-height: 1.375em;
+    white-space: pre-line;
   margin: 0;
 }
 
 a {
   color: var(--color-text-default);
-  font-size: 1.3em;
+  font-size: 1em;
+  line-height: 1.375em;
   font-family: var(--font-family);
 }
 
 i {
   color: var(--color-text-default);
-  font-size: 1.3em;
+  font-size: 1em;
+  line-height: 1.375em;
   font-family: var(--font-family);
 }
 
 body {
   margin: 0;
-  background-color: var(--color-background);
+  background-color: var(--color-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -237,7 +266,11 @@ button:active {
 }
 
 button:focus{
+ 
   outline: none;
+  border-style: solid;
+  border-color: var(--color-text-default);
+  border-width: 1px;
 }
 
 

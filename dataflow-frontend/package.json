@@ -9,6 +9,8 @@
     "@types/react-dom": "16.9.2",
     "ngraph.forcelayout": "^1.0.0",
     "ngraph.graph": "^18.0.3",
+    "office-ui-fabric-react": "^7.55.1",
+    "@uifabric/fluent-theme": "^0.16.7",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",

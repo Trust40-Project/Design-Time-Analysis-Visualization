@@ -11,9 +11,10 @@
     will-change: left, top, height, width;
 }
 
+
+
 .nodeTitle{
-    grid-column: 1/2;
-    grid-row: 1/2;
+   
     background-color: transparent;
     
 }
@@ -33,7 +34,11 @@
     transition-timing-function: ease;
     will-change: left, top, height, width;
     border: none;
+    border-width: 0px;
+}
 
+.largenode:focus{
+    border: none;
 }
 
 
@@ -46,11 +51,11 @@
 }
 
 .nodeContent{
-    background-color: var(--color-foreground);
+    background-color: var(--color-secondary);
     height: 100%;
     width: 100%;
-    overflow-y: hidden;
-    overflow-x: auto;
+    overflow: hidden;
+    
     display: flex;
     flex-direction: row;
 }

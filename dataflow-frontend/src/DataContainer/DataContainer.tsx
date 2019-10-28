@@ -5,7 +5,9 @@ import { IDatum } from '../Models/Datum/IDatum';
 import DataTile from '../DataTile/DataTile';
 
 type DataContainerProps={
-    links: ILink<number, IDatum>[]
+    links: ILink<number, IDatum>[],
+    onSelectedNodeChange:(nodeId: number) => void,
+    isInput:boolean
 }
 export class DataContainer extends React.Component<DataContainerProps>{
 
@@ -17,7 +19,7 @@ export class DataContainer extends React.Component<DataContainerProps>{
     render(){
         const links = this.props.links;
         const dataTiles = links.map((value: ILink<number, IDatum>, index: number, array: ILink<number, IDatum>[]) =>
-            <DataTile key={value.data.id} datum={value.data}>
+            <DataTile onSelectedNodeChange={this.props.onSelectedNodeChange} key={value.data.id} link={value} isInput={this.props.isInput}>
 
             </DataTile>
            

@@ -11,8 +11,7 @@ import Edge from '../Edge/Edge';
 import { JSXElement, identifier } from '@babel/types';
 import { ILink } from '../Models/NGraph/ILink';
 import { DataContainer } from '../DataContainer/DataContainer';
-
-
+import {Depths} from '@uifabric/fluent-theme/lib/fluent/FluentDepths'
 type NodeProps = {
     node: INode<number, IOperation>,
     key: number,
@@ -72,9 +71,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
                 to={layout.getNodePosition(value.toId)}
                 key={value.data.id}
                 nodeWidth={this.state.width}
-                nodeHeight={this.state.height}>
-
-            </Edge>
+                nodeHeight={this.state.height}    
+            ></Edge>
         ));
 
 
@@ -82,7 +80,7 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
         return (
             <section>
-                <button onClick={this.handleSelectedNodeChange} className={cssClass + ' blur border'} style={{ top: leftTopCorner.y + 'em', left: leftTopCorner.x + 'em' }}>
+                <button tabIndex={node.id} onClick={this.handleSelectedNodeChange} className={cssClass + ' blur border'} style={{ top: leftTopCorner.y + 'em', left: leftTopCorner.x + 'em' }}>
                     {this.renderNodeContent()}
                 </button>
                 {toDisplay}
@@ -101,7 +99,7 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const node: INode<number, IOperation> = this.props.node;
 
         if (!this.props.isSelected) {
-            return node.data.name;
+            return (<p>{node.data.name}</p>);
         } else {
 
             const links = this.props.graph.getLinks(node.id);
@@ -111,11 +109,11 @@ export class Node extends React.Component<NodeProps, NodeState> {
             return (
                 <div className='nodeContainer'>
                     <header className='nodeTitle'>
-                        <h5>{node.data.name}</h5>
+                        <h2>{node.data.name}</h2>
                     </header>
                     <div className='nodeContent'>
-                        <DataContainer links={input}></DataContainer>
-                        <DataContainer links={output}></DataContainer>
+                        <DataContainer isInput={true} onSelectedNodeChange={this.props.onSelectedNodeChange} links={input}></DataContainer>
+                        <DataContainer isInput={false} onSelectedNodeChange={this.props.onSelectedNodeChange} links={output}></DataContainer>
                     </div>
                 </div>
 
