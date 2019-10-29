@@ -41,6 +41,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
         this.handleSelectedNodeChange = this.handleSelectedNodeChange.bind(this);
         this.drawBorderRevealHighlight = this.drawBorderRevealHighlight.bind(this);
         this.removeBorderRevealHighlight = this.removeBorderRevealHighlight.bind(this);
+        this.drawRevealHighlight = this.drawRevealHighlight.bind(this);
+        this.removeRevealHighlight = this.removeRevealHighlight.bind(this);
         //this.handleClickRipple = this.handleClickRipple.bind(this);
     }
 
@@ -57,12 +59,28 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const nodeBorder = document.getElementById('node-border-'+this.props.node.id);
         if(nodeBorder){
             event.target = nodeBorder; 
-            RevealEffectService.getRevealEffectService().removeBorderRevealHighlight(event);
+            RevealEffectService.getRevealEffectService().removeReveal(event);
 
         }
     }
 
-    handleSelectedNodeChange(event:React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    drawRevealHighlight(event:React.MouseEvent<HTMLElement, MouseEvent>){
+        const nodeContainer = document.getElementById('node-container-'+this.props.node.id);
+        if(nodeContainer){
+            event.target = nodeContainer; 
+            RevealEffectService.getRevealEffectService().addRevealHighlight(event);
+        }
+    }
+
+    removeRevealHighlight(event: React.MouseEvent<HTMLElement, MouseEvent>){
+        const nodeContainer = document.getElementById('node-container-'+this.props.node.id);
+        if(nodeContainer){
+            event.target = nodeContainer; 
+        RevealEffectService.getRevealEffectService().removeReveal(event);
+        }
+    }
+
+    handleSelectedNodeChange(selectedNodeId:number, event:React.MouseEvent<HTMLElement, MouseEvent>) {
        /* const button =document.getElementById('node-button-'+this.props.node.id);
         if(button){
             event.target = button;
@@ -70,7 +88,11 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
         }
         */
-       this.props.onSelectedNodeChange(this.props.node.id);
+       this.props.onSelectedNodeChange(selectedNodeId);
+
+      // this.props.onSelectedNodeChange(this.props.node.id);
+       this.removeRevealHighlight(event);
+       this.removeBorderRevealHighlight(event);
     }
 /*
     handleClickRipple(event:React.MouseEvent<HTMLButtonElement,MouseEvent>){
@@ -120,8 +142,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
             <section>
                 <div onMouseLeave={this.removeBorderRevealHighlight} onMouseMove={this.drawBorderRevealHighlight} className={"nodeArea "+cssLargeNodeClass} style={{ top: leftTopCorner.y + 'em', left: leftTopCorner.x + 'em' }}>
                     <div id={"node-border-"+node.id} className="nodeBorder">
-                        <div className="nodeContainer">
-                            <button tabIndex={node.id} onClick={this.handleSelectedNodeChange} className={"nodeButton blur "+cssNodeSelectedButtonClass}>
+                        <div id={"node-container-"+node.id} onMouseLeave={this.removeRevealHighlight} onMouseMove={this.drawRevealHighlight} className="nodeContainer">
+                            <button tabIndex={node.id} onClick={this.handleSelectedNodeChange.bind(this, node.id)} className={"nodeButton blur "+cssNodeSelectedButtonClass}>
                                 {this.renderNodeTitle()}
                             </button>
                             {this.renderNodeContent()}
@@ -178,8 +200,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
             return (
                 <div className='nodeContent'>
                    
-                        <DataContainer isInput={true} onSelectedNodeChange={this.props.onSelectedNodeChange} links={input}></DataContainer>
-                        <DataContainer isInput={false} onSelectedNodeChange={this.props.onSelectedNodeChange} links={output}></DataContainer>
+                        <DataContainer isInput={true} onSelectedNodeChange={this.handleSelectedNodeChange} links={input}></DataContainer>
+                        <DataContainer isInput={false} onSelectedNodeChange={this.handleSelectedNodeChange} links={output}></DataContainer>
                 </div>
 
             );

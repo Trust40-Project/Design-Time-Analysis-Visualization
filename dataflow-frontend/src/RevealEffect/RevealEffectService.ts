@@ -30,6 +30,20 @@ export class RevealEffectService{
         }, 800);
     }
 
+    public addRevealHighlight(event: React.MouseEvent<HTMLElement, MouseEvent>):void {
+        if (!(/Mobi|Android/i.test(navigator.userAgent))) {
+            var target = (event.target || event.currentTarget) as HTMLElement;
+    
+    
+            let x = event.pageX - target.getBoundingClientRect().left - window.scrollX;
+          let y = event.pageY - target.getBoundingClientRect().top - window.scrollY;
+          
+            this.drawEffect(target, x, y, getComputedStyle(document.documentElement, null).getPropertyValue('--color-reveal-highlight'), 80);
+    
+           
+        }
+       }
+
     public drawBorderRevealHighlight(event: React.MouseEvent<HTMLElement, MouseEvent>):void {
         if (!(/Mobi|Android/i.test(navigator.userAgent))) {
 
@@ -58,7 +72,7 @@ export class RevealEffectService{
             
       }
     
-      public removeBorderRevealHighlight(event: React.MouseEvent<HTMLElement, MouseEvent>):void {
+      public removeReveal(event: React.MouseEvent<HTMLElement, MouseEvent>):void {
         if (!(/Mobi|Android/i.test(navigator.userAgent))) {
     
             const target = (event.target  || event.currentTarget) as HTMLElement;
@@ -67,7 +81,7 @@ export class RevealEffectService{
       }
 
 
-      private drawEffect(element: HTMLElement, x: number, y: number, lightColor: string, gradientSize: number, cssLightEffect: string = '') {
+      private drawEffect(element: HTMLElement, x: number, y: number, lightColor: string, gradientSize: number, cssLightEffect: string = ''):void {
         let lightBg;
         if (cssLightEffect === '') {
             lightBg = `radial-gradient(circle ${gradientSize}px at ${x}px ${y}px, ${lightColor}, ${getComputedStyle(document.documentElement, null).getPropertyValue('--color-reveal-highlight-center')}`;
@@ -78,7 +92,7 @@ export class RevealEffectService{
 
     }
 
-    private clearEffect(element: HTMLElement) {
+    private clearEffect(element: HTMLElement):void {
 
         element.style.backgroundImage = 'none';
 

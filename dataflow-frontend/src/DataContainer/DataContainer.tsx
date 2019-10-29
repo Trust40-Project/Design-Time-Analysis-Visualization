@@ -6,7 +6,7 @@ import DataTile from '../DataTile/DataTile';
 
 type DataContainerProps={
     links: ILink<number, IDatum>[],
-    onSelectedNodeChange:(nodeId: number) => void,
+    onSelectedNodeChange:(nodeId: number, event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
     isInput:boolean
 }
 export class DataContainer extends React.Component<DataContainerProps>{

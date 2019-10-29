@@ -41,7 +41,7 @@ code {
     --color-acrylic: rgba(27,26,25,0.3);
     --color-text-default: #f3f2f1;
     --color-text-secondary: #C8C6C4;
-    --color-reveal-highlight: rgba(255,255,255,0.6);
+    --color-reveal-highlight: rgba(255,255,255,0.3);
     --color-reveal-highlight-border: rgba(255,255,255,0.3);
     --color-reveal-highlight-center: rgba(255, 255, 255, 0);
     --font-family: '-apple-system, BlinkMacSystemFont, "Segoe UI Webfont", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif';

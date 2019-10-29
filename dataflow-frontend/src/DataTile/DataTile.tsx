@@ -12,7 +12,7 @@ const LockIcon = () => <Icon iconName="Lock" />;
 type DataTileProps = {
     link: ILink<number, IDatum>,
     key: number,
-    onSelectedNodeChange: (nodeId: number) => void;
+    onSelectedNodeChange: (nodeId: number, event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
     isInput: boolean
 }
 const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput }) => {
@@ -33,8 +33,7 @@ const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput
                     </div>
                 </div>
                 <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-                    e.stopPropagation();
-                    onSelectedNodeChange(isInput ? link.fromId : link.toId);
+                    onSelectedNodeChange(isInput ? link.fromId : link.toId, e);
                 }} title={link.data.name} className="dataTileCanvas border">
                     <h5 className="dataName">
                         {link.data.name}
