@@ -1,17 +1,64 @@
 .node{
     padding: 10px;    
-    height: 2.6em;
-    width: 9.7em;
+   /* height: 2.6em;
+    width: 9.7em;*/
     overflow: hidden;
-    position: absolute;
+   /* position: absolute;*/
     border-radius: 5px;
+    
+    width: 100%;
+    height: 100%;
+}
+
+.nodeArea{
+    padding: 5px;
+    height: 5em;
+    width: 9.7em;
+    position: absolute;
     z-index: 5;
     transition: width 0.5s, height 0.5s , top 0.5s, left 0.5s;
     transition-timing-function: ease;
     will-change: left, top, height, width;
+    overflow: hidden;
+
 }
 
+.nodeBorder{
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    border-radius: 5px;
 
+
+}
+.nodeContainer{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: var(--color-primary);
+
+}
+
+.nodeButton{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border:none;
+}
+
+.nodeSelectedButton{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    height: 5em;
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
 .nodeTitle{
    
@@ -20,14 +67,14 @@
 }
 
 .largenode{
-    padding: 0px;    
+    padding: 5px;    
     height: 18em;
     width: 29.1em;
     max-width: 100vw;
     max-height: 100vh;
     overflow: hidden;
     position: absolute;
-    border-radius: 5px;
+   /* border-radius: 5px;*/
     
     z-index: 10;
     transition: width 0.5s, height 0.5s , top 0.5s, left 0.5s;
@@ -41,7 +88,7 @@
     border: none;
 }
 
-
+/*
 .nodeContainer{
     height: 100%;
     width: 100%;
@@ -49,7 +96,7 @@
     display: flex;
     flex-direction: column;
 }
-
+*/
 .nodeContent{
     background-color: var(--color-secondary);
     height: 100%;
@@ -58,4 +105,8 @@
     
     display: flex;
     flex-direction: row;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

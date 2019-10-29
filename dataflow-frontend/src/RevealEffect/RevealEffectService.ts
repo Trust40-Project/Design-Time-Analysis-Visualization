@@ -29,4 +29,59 @@ export class RevealEffectService{
             circle.remove();
         }, 800);
     }
+
+    public drawBorderRevealHighlight(event: React.MouseEvent<HTMLElement, MouseEvent>):void {
+        if (!(/Mobi|Android/i.test(navigator.userAgent))) {
+
+            const target = (event.target||event.currentTarget) as HTMLElement;
+
+            const x = event.pageX - target.getBoundingClientRect().left - window.scrollX;
+            const y = event.pageY - target.getBoundingClientRect().top - window.scrollY;
+            
+              this.drawEffect(target, x, y, getComputedStyle(document.documentElement, null).getPropertyValue('--color-reveal-highlight-border'), 80);
+      /*
+            const x = event.pageX - this.borders[i].getBoundingClientRect().left - window.scrollX;
+            const y = event.pageY - this.borders[i].getBoundingClientRect().top - window.scrollY;
+            if (this.isIntersected(this.borders[i], event.clientX, event.clientY, 80)) {
+    
+              this.drawEffect(this.borders[i], x, y, getComputedStyle(document.documentElement, null).getPropertyValue('--color-reveal-highlight-border'), 80);
+    
+            }
+    
+            else {
+    
+              this.clearEffect(this.borders[i]);
+    
+            }*/
+          
+        }
+            
+      }
+    
+      public removeBorderRevealHighlight(event: React.MouseEvent<HTMLElement, MouseEvent>):void {
+        if (!(/Mobi|Android/i.test(navigator.userAgent))) {
+    
+            const target = (event.target  || event.currentTarget) as HTMLElement;
+            this.clearEffect(target);
+        }
+      }
+
+
+      private drawEffect(element: HTMLElement, x: number, y: number, lightColor: string, gradientSize: number, cssLightEffect: string = '') {
+        let lightBg;
+        if (cssLightEffect === '') {
+            lightBg = `radial-gradient(circle ${gradientSize}px at ${x}px ${y}px, ${lightColor}, ${getComputedStyle(document.documentElement, null).getPropertyValue('--color-reveal-highlight-center')}`;
+        } else {
+            lightBg = cssLightEffect;
+        }
+        element.style.backgroundImage = lightBg;
+
+    }
+
+    private clearEffect(element: HTMLElement) {
+
+        element.style.backgroundImage = 'none';
+
+    }
+    
 }
