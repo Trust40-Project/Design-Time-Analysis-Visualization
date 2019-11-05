@@ -35,8 +35,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
     constructor(props: NodeProps) {
         super(props);
         this.state = {
-            width: this.props.isSelected ? 29.1 : 9.7,
-            height: this.props.isSelected ? 18 : 5,
+            width: this.props.isSelected ? 32 : 9.7,
+            height: this.props.isSelected ? 20 : 5,
         }
         this.handleSelectedNodeChange = this.handleSelectedNodeChange.bind(this);
         this.drawBorderRevealHighlight = this.drawBorderRevealHighlight.bind(this);
@@ -106,8 +106,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
     componentDidUpdate(prevProps: Readonly<NodeProps>, prevState: Readonly<NodeState>) {
         if (prevProps.isSelected !== this.props.isSelected) {
             this.setState({
-                width: this.props.isSelected ? 29.1 : 9.7,
-                height: this.props.isSelected ? 18 : 5,
+                width: this.props.isSelected ? 32 : 9.7,
+                height: this.props.isSelected ? 20 : 5,
             });
         }
 
@@ -181,7 +181,7 @@ export class Node extends React.Component<NodeProps, NodeState> {
         if(!this.props.isSelected){
             return <p>{this.props.node.data.name}</p>
         } else {
-            return <h2>{this.props.node.data.name}</h2>
+            return <h3>{this.props.node.data.name}</h3>
         }
     }
 
@@ -199,9 +199,9 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
             return (
                 <div className='nodeContent'>
-                   
-                        <DataContainer isInput={true} onSelectedNodeChange={this.handleSelectedNodeChange} links={input}></DataContainer>
-                        <DataContainer isInput={false} onSelectedNodeChange={this.handleSelectedNodeChange} links={output}></DataContainer>
+                        <DataContainer isInput={true} onSelectedNodeChange={this.handleSelectedNodeChange} links={input} titleName="Input"></DataContainer>
+
+                        <DataContainer isInput={false} onSelectedNodeChange={this.handleSelectedNodeChange} links={output} titleName="Output"></DataContainer>
                 </div>
 
             );

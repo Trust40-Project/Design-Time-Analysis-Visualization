@@ -1,39 +1,36 @@
-.node{
-    padding: 10px;    
-   /* height: 2.6em;
+.node {
+    padding: 10px;
+    /* height: 2.6em;
     width: 9.7em;*/
     overflow: hidden;
-   /* position: absolute;*/
+    /* position: absolute;*/
     border-radius: 5px;
-    
     width: 100%;
     height: 100%;
 }
 
-.nodeArea{
+.nodeArea {
     padding: 10px;
     height: 5em;
     width: 9.7em;
     position: absolute;
     z-index: 5;
-    transition: width 0.5s, height 0.5s , top 0.5s, left 0.5s;
+    transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s;
     transition-timing-function: ease;
     will-change: left, top, height, width;
     overflow: hidden;
-
 }
 
-.nodeBorder{
+.nodeBorder {
     width: 100%;
     height: 100%;
     padding: 2px;
     border-radius: 5px;
     background-color: transparent;
     overflow: hidden;
-
-
 }
-.nodeContainer{
+
+.nodeContainer {
     width: 100%;
     height: 100%;
     padding: 0;
@@ -43,21 +40,20 @@
     border-radius: 5px;
     background-color: var(--color-primary);
     overflow: hidden;
-
 }
 
-.nodeButton{
+.nodeButton {
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    border:none;
+    border: none;
 }
 
-.nodeButton:focus{
+.nodeButton:focus {
     border-color: var(--color-reveal-highlight-border);
 }
 
-.nodeSelectedButton{
+.nodeSelectedButton {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 0px;
@@ -67,38 +63,36 @@
     padding-bottom: 0;
 }
 
-.nodeSelectedButton:focus{
-    border:none;
+.nodeSelectedButton:focus {
+    border: none;
     outline: none;
 }
 
-.nodeTitle{
-   
+.nodeTitle {
     background-color: transparent;
-    
 }
 
-.largenode{
-    padding: 10px;    
-    height: 18em;
-    width: 29.1em;
+.largenode {
+    padding: 10px;
+    height: 20em;
+    width: 32em;
     max-width: 100vw;
     max-height: 100vh;
     overflow: hidden;
     position: absolute;
-   /* border-radius: 5px;*/
-    
+    /* border-radius: 5px;*/
     z-index: 10;
-    transition: width 0.5s, height 0.5s , top 0.5s, left 0.5s;
+    transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s;
     transition-timing-function: ease;
     will-change: left, top, height, width;
     border: none;
     border-width: 0px;
 }
 
-.largenode:focus{
+.largenode:focus {
     border: none;
 }
+
 
 /*
 .nodeContainer{
@@ -109,12 +103,12 @@
     flex-direction: column;
 }
 */
-.nodeContent{
+
+.nodeContent {
     background-color: var(--color-secondary);
     height: 100%;
     width: 100%;
     overflow: hidden;
-    
     display: flex;
     flex-direction: row;
     border-top-left-radius: 0px;

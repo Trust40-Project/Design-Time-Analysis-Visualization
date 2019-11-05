@@ -146,19 +146,19 @@ function createMockGraph(){
     softwareComponentLocation.nodes.push(calcDisttNode);
 
 
-    graph.addLink(supervisor.id, filter.id, new Datum("workerId", PrivacyLevels.PUBLIC));
-    graph.addLink(supervisor.id, filter1.id, new Datum("workplaceId", PrivacyLevels.PUBLIC));
-    graph.addLink(worker.id, workerLocations.id,new Datum("workerLocation", PrivacyLevels.SENSITIVE) );
-    graph.addLink(workerLocations.id, filter.id,       new Datum("workerLocation[]", PrivacyLevels.SENSITIVE));
-    graph.addLink(filter.id, project.id, new Datum("worker Location", PrivacyLevels.SENSITIVE));
-    graph.addLink(project.id, calcDist.id,new Datum("location", PrivacyLevels.SENSITIVE) );
-    graph.addLink(workplaces.id, filter1.id,new Datum("workplace[]", PrivacyLevels.PUBLIC) );
-    graph.addLink(filter1.id, project1.id,new Datum("workplace", PrivacyLevels.PUBLIC) );
-    graph.addLink(project1.id, calcDist.id, new Datum("location", PrivacyLevels.PUBLIC));
-    graph.addLink(calcDist.id, supervisor.id,new Datum("distance", PrivacyLevels.PRIVATE) );
+    graph.addLink(supervisor.id, filter.id, new Datum("workerId","min(Input, OFFICIAL)", PrivacyLevels.PUBLIC));
+    graph.addLink(supervisor.id, filter1.id, new Datum("workplaceId","min(Input, OFFICIAL)", PrivacyLevels.PUBLIC));
+    graph.addLink(worker.id, workerLocations.id,new Datum("workerLocation","min(Input, OFFICIAL)", PrivacyLevels.SENSITIVE) );
+    graph.addLink(workerLocations.id, filter.id,       new Datum("workerLocation[]","min(Input, OFFICIAL)", PrivacyLevels.SENSITIVE));
+    graph.addLink(filter.id, project.id, new Datum("worker Location","min(Input, OFFICIAL)", PrivacyLevels.SENSITIVE));
+    graph.addLink(project.id, calcDist.id,new Datum("location","min(Input, OFFICIAL)", PrivacyLevels.SENSITIVE) );
+    graph.addLink(workplaces.id, filter1.id,new Datum("workplace[]","min(Input, OFFICIAL)", PrivacyLevels.PUBLIC) );
+    graph.addLink(filter1.id, project1.id,new Datum("workplace","min(Input, OFFICIAL)", PrivacyLevels.PUBLIC) );
+    graph.addLink(project1.id, calcDist.id, new Datum("location","min(Input, OFFICIAL)", PrivacyLevels.PUBLIC));
+    graph.addLink(calcDist.id, supervisor.id,new Datum("distance","min(Input, OFFICIAL)", PrivacyLevels.PRIVATE) );
 
     var physicsSettings = {
-        springLength: 10,
+        springLength: 32,
         springCoeff: 0.0008,
         gravity: -0.5,
         theta: 0.5,
@@ -183,15 +183,15 @@ function createMockGraph(){
             smallesty = pos.y;
         }
       });
-      if(smallestx < 15 || smallesty < 15){
+      if(smallestx < 20 || smallesty < 20){
           graph.forEachNode(function (node) {
             var pos = layout.getNodePosition(node.id);
-              if(smallestx< 15){
-                  layout.setNodePosition(node.id,pos.x + Math.abs(smallestx)+15, pos.y );
+              if(smallestx< 20){
+                  layout.setNodePosition(node.id,pos.x + Math.abs(smallestx)+20, pos.y );
               }
               pos = layout.getNodePosition(node.id);
-              if(smallesty< 15){
-                layout.setNodePosition(node.id,pos.x, pos.y + Math.abs(smallesty) + 15); 
+              if(smallesty< 20){
+                layout.setNodePosition(node.id,pos.x, pos.y + Math.abs(smallesty) + 20); 
 
               }
           });

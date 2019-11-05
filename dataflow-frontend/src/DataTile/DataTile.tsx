@@ -5,6 +5,8 @@ import { IDatum } from '../Models/Datum/IDatum';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { ILink } from '../Models/NGraph/ILink';
 import { RevealEffectService } from '../RevealEffect/RevealEffectService';
+import { getId } from 'office-ui-fabric-react/lib/Utilities';
+import { TooltipHost, DirectionalHint } from 'office-ui-fabric-react/lib/Tooltip';
 
 const InputIcon = () => <Icon iconName="Export" />;
 const OutputIcon = () => <Icon iconName="Import"/>;
@@ -34,6 +36,7 @@ function removeBorderReveal(id:string, event: React.MouseEvent<HTMLElement, Mous
 }
 const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput }) => {
 
+    const tooltipId = getId('text-tooltip');
     return (
 
         <div className="dataTile">
@@ -42,7 +45,14 @@ const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput
                     <div id={'icon-oval-border-'+link.data.id} className="iconOvalBorder">
                         <div className="iconOval">
                         <span>
-                            <LockIcon />
+                        <TooltipHost
+                                    content={link.data.privacyLevelCalculation}
+                                    id={tooltipId}
+                                    tooltipProps={{ style: { overflowY: 'auto' },maxWidth:"16em" }}
+                                    styles={{ root: { display: 'inline-block' } }}
+                                >
+                                    <LockIcon aria-describedby={tooltipId}/>
+                                </TooltipHost>
                         </span>
 
                         <span>

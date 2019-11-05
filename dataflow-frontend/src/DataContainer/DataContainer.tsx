@@ -7,7 +7,8 @@ import DataTile from '../DataTile/DataTile';
 type DataContainerProps={
     links: ILink<number, IDatum>[],
     onSelectedNodeChange:(nodeId: number, event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
-    isInput:boolean
+    isInput:boolean,
+    titleName:string
 }
 export class DataContainer extends React.Component<DataContainerProps>{
 
@@ -27,7 +28,11 @@ export class DataContainer extends React.Component<DataContainerProps>{
 
         return(
             <div className='dataContainer'>
-                {dataTiles}
+                <h5 className="titleName">{this.props.titleName}</h5>
+                <div className='dataTilesContainer'>
+                        {dataTiles}
+
+                </div>
             </div>
         );
     }
