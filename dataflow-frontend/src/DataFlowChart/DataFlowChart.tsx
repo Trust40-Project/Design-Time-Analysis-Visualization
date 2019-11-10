@@ -158,7 +158,7 @@ function createMockGraph(){
     graph.addLink(calcDist.id, supervisor.id,new Datum("distance","min(Input, OFFICIAL)", PrivacyLevels.PRIVATE) );
 
     var physicsSettings = {
-        springLength: 32,
+        springLength: 20,
         springCoeff: 0.0008,
         gravity: -0.5,
         theta: 0.5,

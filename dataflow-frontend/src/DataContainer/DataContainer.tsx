@@ -16,6 +16,11 @@ export class DataContainer extends React.Component<DataContainerProps>{
         super(props);
     }
 
+    componentDidMount(){
+        console.log("children");
+        console.dir(this.props.children);
+        console.log("____");
+    }
 
     render(){
         const links = this.props.links;

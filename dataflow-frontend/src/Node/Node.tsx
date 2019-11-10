@@ -31,6 +31,8 @@ type NodeState  = {
 
 
 export class Node extends React.Component<NodeProps, NodeState> {
+    private readonly revealEffectService: RevealEffectService = new RevealEffectService();
+    private nodeBorder: HTMLElement|null = null;
 
     constructor(props: NodeProps) {
         super(props);
@@ -50,7 +52,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const nodeBorder = document.getElementById('node-border-'+this.props.node.id);
         if(nodeBorder){
             event.target = nodeBorder; 
-            RevealEffectService.getRevealEffectService().drawBorderRevealHighlight(event);
+            this.revealEffectService.drawBorderRevealHighlight(event);
+           // RevealEffectService.getRevealEffectService().drawBorderRevealHighlight(event);
 
         }
     }
@@ -59,7 +62,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const nodeBorder = document.getElementById('node-border-'+this.props.node.id);
         if(nodeBorder){
             event.target = nodeBorder; 
-            RevealEffectService.getRevealEffectService().removeReveal(event);
+           // RevealEffectService.getRevealEffectService().removeReveal(event);
+           this.revealEffectService.removeReveal(event);
 
         }
     }
@@ -68,7 +72,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const nodeContainer = document.getElementById('node-container-'+this.props.node.id);
         if(nodeContainer){
             event.target = nodeContainer; 
-            RevealEffectService.getRevealEffectService().addRevealHighlight(event);
+            //RevealEffectService.getRevealEffectService().addRevealHighlight(event);
+            this.revealEffectService.addRevealHighlight(event);
         }
     }
 
@@ -76,7 +81,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const nodeContainer = document.getElementById('node-container-'+this.props.node.id);
         if(nodeContainer){
             event.target = nodeContainer; 
-        RevealEffectService.getRevealEffectService().removeReveal(event);
+            //RevealEffectService.getRevealEffectService().removeReveal(event);
+            this.revealEffectService.removeReveal(event);
         }
     }
 
@@ -113,6 +119,14 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
     }
 
+    componentDidMount(){
+       // const nodeBorder: HTMLElement|null = document.querySelector('node-border-'+this.props.node.id);
+     
+        if(this.nodeBorder){
+            this.revealEffectService.addBorderElement(this.nodeBorder);
+        }
+    }
+
     render() {
         const node: INode<number, IOperation> = this.props.node;
         const layout: ILayout<number, IOperation> = this.props.layout;
@@ -140,8 +154,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
         return (
 
             <section>
-                <div onMouseLeave={this.removeBorderRevealHighlight} onMouseMove={this.drawBorderRevealHighlight} className={"nodeArea "+cssLargeNodeClass} style={{ top: leftTopCorner.y + 'em', left: leftTopCorner.x + 'em' }}>
-                    <div id={"node-border-"+node.id} className="nodeBorder">
+                <div  onMouseLeave={this.removeBorderRevealHighlight} onMouseMove={this.drawBorderRevealHighlight} className={"nodeArea "+cssLargeNodeClass} style={{ top: leftTopCorner.y + 'em', left: leftTopCorner.x + 'em' }}>
+                    <div ref = {ref => this.nodeBorder = ref} id={"node-border-"+node.id} className="nodeBorder">
                         <div id={"node-container-"+node.id} onMouseLeave={this.removeRevealHighlight} onMouseMove={this.drawRevealHighlight} className="nodeContainer">
                             <button tabIndex={node.id} onClick={this.handleSelectedNodeChange.bind(this, node.id)} className={"nodeButton blur "+cssNodeSelectedButtonClass}>
                                 {this.renderNodeTitle()}

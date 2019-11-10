@@ -23,7 +23,8 @@ function drawBorderReveal(id:string, event: React.MouseEvent<HTMLElement, MouseE
     const dataTile = document.getElementById(id);
     if(dataTile){
         event.target = dataTile;
-        RevealEffectService.getRevealEffectService().drawBorderRevealHighlight(event);
+        //TODO
+        //RevealEffectService.getRevealEffectService().drawBorderRevealHighlight(event);
     }
 }
 
@@ -31,9 +32,11 @@ function removeBorderReveal(id:string, event: React.MouseEvent<HTMLElement, Mous
     const dataTile = document.getElementById(id);
     if(dataTile){
         event.target = dataTile;
-        RevealEffectService.getRevealEffectService().removeReveal(event);
+        //TODO
+        //RevealEffectService.getRevealEffectService().removeReveal(event);
     }
 }
+
 const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput }) => {
 
     const tooltipId = getId('text-tooltip');
