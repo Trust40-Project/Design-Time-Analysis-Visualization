@@ -76,7 +76,7 @@ const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput
                     </div>
                     
                 </div>
-                <div onMouseLeave={(e: React.MouseEvent<HTMLElement, MouseEvent>) => revealEffectService.removeReveal(e)} onMouseMove={(e: React.MouseEvent<HTMLElement, MouseEvent>) => revealEffectService.drawBorderRevealHighlight(e)}  className="dataTileCanvas">
+                <div className="dataTileCanvas">
                     <div ref = {ref => {if(ref) revealEffectService.addBorderElement(ref);}} id={'data-tile-canvas-'+link.data.id} className="dataTileBorder">
                         <button onMouseEnter={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => onHoverNodeChange(isInput ? link.fromId : link.toId)} 
                                 onMouseLeave={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => onHoverNodeChange(undefined)}

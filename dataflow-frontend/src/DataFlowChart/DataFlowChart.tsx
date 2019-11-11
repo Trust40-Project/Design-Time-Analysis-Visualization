@@ -18,6 +18,7 @@ import { ILayout } from '../Models/NGraph/ILayout';
 
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { number, node } from 'prop-types';
+import { RevealEffectService } from '../RevealEffect/RevealEffectService';
 
 type DataFlowChartState = {
     selectedNodeId: (number|undefined),
@@ -26,6 +27,7 @@ type DataFlowChartState = {
 }
 
 export class DataFlowChart extends React.Component<{},DataFlowChartState> {
+    private revealEffectService = new RevealEffectService();
     constructor(props:Readonly<{}>){
         super(props);
         this.state = {
@@ -38,7 +40,11 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
         this.handleSelectedNodeChange = this.handleSelectedNodeChange.bind(this);
         this.handelEdgeAnimationToggle = this.handelEdgeAnimationToggle.bind(this);
         this.handleHoverNodeChange = this.handleHoverNodeChange.bind(this);
-        
+        this.drawBorderRevealHighlight = this.drawBorderRevealHighlight.bind(this);
+    }
+
+    drawBorderRevealHighlight(event: React.MouseEvent<HTMLElement, MouseEvent>){
+        this.revealEffectService.drawBorderRevealHighlight(event);
     }
 
     handleSelectedNodeChange(nodeId: number){
@@ -79,6 +85,7 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
                     edgeAnimationOn={edgeAnimationOn}
                     onHoverNodeChange={this.handleHoverNodeChange}
                     hoverNodeId={hoverNodeId}
+                    revealEffectService={this.revealEffectService}
                 >
                 </SoftwareComponent>
             );
@@ -86,7 +93,7 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
         
         
         return(
-            <div>
+            <div onMouseMove={this.drawBorderRevealHighlight} style={{minHeight:'100vh', minWidth:'100vw', position:'fixed', top:0, left:0, overflow:'auto'}}>
                 {components}
 
                 <div style={{display: 'flex', width:'160px', height:'40em', justifyContent:'space-around', flexWrap:'wrap'}}>

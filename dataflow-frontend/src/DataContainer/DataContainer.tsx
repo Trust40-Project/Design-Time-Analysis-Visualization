@@ -31,7 +31,7 @@ export class DataContainer extends React.Component<DataContainerProps>{
         );
 
         return(
-            <div className='dataContainer'>
+            <div onMouseLeave={(e: React.MouseEvent<HTMLElement, MouseEvent>) => this.props.revealEffectService.removeBorderRevealHighlight(e)} onMouseMove={(e: React.MouseEvent<HTMLElement, MouseEvent>) => this.props.revealEffectService.drawBorderRevealHighlight(e)} className='dataContainer'>
                 <h5 className="titleName">{this.props.titleName}</h5>
                 <div className='dataTilesContainer'>
                         {dataTiles}

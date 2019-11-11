@@ -9,6 +9,7 @@ import { IOperation } from '../Models/Operation/IOperation';
 import { IGraph } from '../Models/NGraph/IGraph';
 import { IDatum } from '../Models/Datum/IDatum';
 import { RevealEffect } from '../RevealEffect/RevealEffect';
+import { RevealEffectService } from '../RevealEffect/RevealEffectService';
 
 type SoftwareComponentProps = {
     component: ISoftwareComponent,
@@ -20,7 +21,8 @@ type SoftwareComponentProps = {
     onEdgeAnimationToggle: () => void,
     edgeAnimationOn: boolean,
     onHoverNodeChange: (nodeId: (number|undefined)) => void,
-    hoverNodeId: (number|undefined)
+    hoverNodeId: (number|undefined),
+    revealEffectService: RevealEffectService
 }
 
 export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
@@ -42,6 +44,7 @@ export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
                 edgeAnimationOn={this.props.edgeAnimationOn}
                 onHoverNodeChange={this.props.onHoverNodeChange}
                 hoverNodeId={this.props.hoverNodeId}
+                nodeRevealEffectService={this.props.revealEffectService}
             ></Node>
         );
 
