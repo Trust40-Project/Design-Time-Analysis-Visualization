@@ -1,12 +1,12 @@
-import React from 'react';
-import './DataTile.css';
-import { IDatum } from '../Models/Datum/IDatum';
-
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { TooltipHost, ITooltipStyleProps, ITooltipHostStyles, ITooltipStyles } from 'office-ui-fabric-react/lib/Tooltip';
+import { getId } from 'office-ui-fabric-react/lib/Utilities';
+import React from 'react';
+import { IDatum } from '../Models/Datum/IDatum';
 import { ILink } from '../Models/NGraph/ILink';
 import { RevealEffectService } from '../RevealEffect/RevealEffectService';
-import { getId } from 'office-ui-fabric-react/lib/Utilities';
-import { TooltipHost, DirectionalHint } from 'office-ui-fabric-react/lib/Tooltip';
+import './DataTile.css';
+import {IComponentStyles} from '@uifabric/foundation';
 
 const InputIcon = () => <Icon iconName="Export" />;
 const OutputIcon = () => <Icon iconName="Import"/>;
@@ -15,8 +15,9 @@ const LockIcon = () => <Icon iconName="Lock" />;
 type DataTileProps = {
     link: ILink<number, IDatum>,
     key: number,
-    onSelectedNodeChange: (nodeId: number, event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-    isInput: boolean
+    onSelectedNodeChange: (nodeId: number, event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
+    isInput: boolean,
+    revealEffectService: RevealEffectService
 }
 
 function drawBorderReveal(id:string, event: React.MouseEvent<HTMLElement, MouseEvent>) {
@@ -37,22 +38,27 @@ function removeBorderReveal(id:string, event: React.MouseEvent<HTMLElement, Mous
     }
 }
 
-const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput }) => {
+  
 
+const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput, revealEffectService }) => {
+
+    
     const tooltipId = getId('text-tooltip');
     return (
 
         <div className="dataTile">
             <div className="dataTileContent">
-                <div onMouseLeave={(e: React.MouseEvent<HTMLElement, MouseEvent>) => removeBorderReveal('icon-oval-border-'+link.data.id, e)} onMouseMove={(e: React.MouseEvent<HTMLElement, MouseEvent>) => drawBorderReveal('icon-oval-border-'+link.data.id, e)} className="iconContainer">
-                    <div id={'icon-oval-border-'+link.data.id} className="iconOvalBorder">
+                <div onMouseLeave={(e: React.MouseEvent<HTMLElement, MouseEvent>) => revealEffectService.removeReveal(e)} onMouseMove={(e: React.MouseEvent<HTMLElement, MouseEvent>) => revealEffectService.drawBorderRevealHighlight(e)} className="iconContainer">
+                    <div ref = {ref => {if(ref) revealEffectService.addBorderElement(ref);}} id={'icon-oval-border-'+link.data.id} className="iconOvalBorder">
                         <div className="iconOval">
                         <span>
+                            
                         <TooltipHost
                                     content={link.data.privacyLevelCalculation}
                                     id={tooltipId}
-                                    tooltipProps={{ style: { overflowY: 'auto' },maxWidth:"16em" }}
-                                    styles={{ root: { display: 'inline-block' } }}
+                                    tooltipProps={{ styles:{ subText:{color:'var(--color-text-default)'}}, style: { overflowY: 'auto' },maxWidth:"16em"}}
+                                   
+                                    calloutProps={{backgroundColor:'var(--color-tertiary)', styles:{beakCurtain:{backgroundColor:'var(--color-tertiary)'}}}}
                                 >
                                     <LockIcon aria-describedby={tooltipId}/>
                                 </TooltipHost>
@@ -65,9 +71,8 @@ const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput
                     </div>
                     
                 </div>
-                <div onMouseLeave={(e: React.MouseEvent<HTMLElement, MouseEvent>) => removeBorderReveal('data-tile-canvas-'+link.data.id, e)} onMouseMove={(e: React.MouseEvent<HTMLElement, MouseEvent>) => drawBorderReveal('data-tile-canvas-'+link.data.id, e)}  className="dataTileCanvas">
-
-                    <div id={'data-tile-canvas-'+link.data.id} className="dataTileBorder">
+                <div onMouseLeave={(e: React.MouseEvent<HTMLElement, MouseEvent>) => revealEffectService.removeReveal(e)} onMouseMove={(e: React.MouseEvent<HTMLElement, MouseEvent>) => revealEffectService.drawBorderRevealHighlight(e)}  className="dataTileCanvas">
+                    <div ref = {ref => {if(ref) revealEffectService.addBorderElement(ref);}} id={'data-tile-canvas-'+link.data.id} className="dataTileBorder">
                         <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
                                         onSelectedNodeChange(isInput ? link.fromId : link.toId, e);
                                     }} title={link.data.name} className="dataTileButton">

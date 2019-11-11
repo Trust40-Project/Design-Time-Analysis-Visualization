@@ -16,7 +16,8 @@ type SoftwareComponentProps = {
     layout: ILayout<number, IOperation>,
     graph: IGraph<number, IOperation, IDatum>,
     selectedNodeId: (number|undefined),
-    onSelectedNodeChange: (nodeId:number)=>void
+    onSelectedNodeChange: (nodeId:number)=>void,
+    onEdgeAnimationToggle: () => void
 }
 
 export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
@@ -34,6 +35,7 @@ export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
                 graph={graph} 
                 isSelected={this.props.selectedNodeId === value.id} 
                 onSelectedNodeChange={this.props.onSelectedNodeChange}
+                onEdgeAnimationToggle={this.props.onEdgeAnimationToggle}
             ></Node>
         );
 

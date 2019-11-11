@@ -20,13 +20,14 @@ type NodeProps = {
     layout: ILayout<number, IOperation>,
     graph: IGraph<number, IOperation, IDatum>,
     isSelected: boolean,
-    onSelectedNodeChange: (nodeId: number) => void
+    onSelectedNodeChange: (nodeId: number) => void,
+    onEdgeAnimationToggle: () => void
 
 }
 
 type NodeState  = {
     width: number,
-    height: number
+    height: number,
 }
 
 
@@ -144,7 +145,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
                 to={layout.getNodePosition(value.toId)}
                 key={value.data.id}
                 nodeWidth={this.state.width}
-                nodeHeight={this.state.height}    
+                nodeHeight={this.state.height}   
+                onEdgeAnimationToggle={this.props.onEdgeAnimationToggle} 
             ></Edge>
         ));
 
@@ -213,9 +215,9 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
             return (
                 <div className='nodeContent'>
-                        <DataContainer isInput={true} onSelectedNodeChange={this.handleSelectedNodeChange} links={input} titleName="Input"></DataContainer>
+                        <DataContainer revealEffectService={this.revealEffectService} isInput={true} onSelectedNodeChange={this.handleSelectedNodeChange} links={input} titleName="Input"></DataContainer>
 
-                        <DataContainer isInput={false} onSelectedNodeChange={this.handleSelectedNodeChange} links={output} titleName="Output"></DataContainer>
+                        <DataContainer revealEffectService={this.revealEffectService} isInput={false} onSelectedNodeChange={this.handleSelectedNodeChange} links={output} titleName="Output"></DataContainer>
                 </div>
 
             );

@@ -11,11 +11,12 @@ type EdgeProps = {
     to:IPosition,
     nodeWidth: number,
     nodeHeight: number,
-    key: number
+    key: number,
+    onEdgeAnimationToggle: () => void
     
 }
 
-const Edge: React.FC<EdgeProps> = ({ from, to,nodeWidth, nodeHeight }) => {
+const Edge: React.FC<EdgeProps> = ({ from, to,nodeWidth, nodeHeight, onEdgeAnimationToggle }) => {
 
     
     //const anchorPositions = getAnchorDirections(from, to, nodeWidth, nodeHeight);
@@ -23,7 +24,7 @@ const Edge: React.FC<EdgeProps> = ({ from, to,nodeWidth, nodeHeight }) => {
     return (
 
         <svg style={{position:"absolute", top: 0, left:0, width:"1em", height:"1em", overflow:"visible"}} viewBox="0 0 1 1">
-             <path className="edge" style={{zIndex:0}}  d={"M "+(from.x)+ " "+ (from.y)+" L "+(to.x) + " " +(to.y)} stroke="var(--color-border)" strokeWidth="0.1" strokeLinecap="round" fill="none" ></path>
+             <path onClick={onEdgeAnimationToggle} className="edge" style={{zIndex:0}}  d={"M "+(from.x)+ " "+ (from.y)+" L "+(to.x) + " " +(to.y)} stroke="var(--color-border)" strokeWidth="0.1" strokeLinecap="round" fill="none" ></path>
         </svg>
     );
 

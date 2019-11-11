@@ -16,25 +16,38 @@ import { FlowChart } from '../Models/FlowChart/FlowChart';
 import {IFlowChart} from '../Models/FlowChart/IFlowChart';
 import { ILayout } from '../Models/NGraph/ILayout';
 
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
+
 type DataFlowChartState = {
-    selectedNodeId: (number|undefined)
+    selectedNodeId: (number|undefined),
+    edgeAnimationOn: boolean
 }
 
 export class DataFlowChart extends React.Component<{},DataFlowChartState> {
     constructor(props:Readonly<{}>){
         super(props);
         this.state = {
-            selectedNodeId: undefined
-
+            selectedNodeId: undefined,
+            edgeAnimationOn: true
+            
         }
 
         this.handleSelectedNodeChange = this.handleSelectedNodeChange.bind(this);
+        this.handelEdgeAnimationToggle = this.handelEdgeAnimationToggle.bind(this);
         
     }
 
     handleSelectedNodeChange(nodeId: number){
         this.setState({
             selectedNodeId:(nodeId == this.state.selectedNodeId)?undefined: nodeId,
+        });
+    }
+
+    handelEdgeAnimationToggle():void{
+        console.log("toggle edge animation");
+        const currentAnimationState = this.state.edgeAnimationOn;
+        this.setState({
+            edgeAnimationOn: !currentAnimationState
         });
     }
 
@@ -50,6 +63,7 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
                     graph={mockFlowChart.graph}
                     selectedNodeId={selectedNodeId}
                     onSelectedNodeChange={this.handleSelectedNodeChange}
+                    onEdgeAnimationToggle={this.handelEdgeAnimationToggle}
                 >
                 </SoftwareComponent>
             );
@@ -59,6 +73,68 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
         return(
             <div>
                 {components}
+
+                <div style={{display: 'flex', width:'160px', height:'40em', justifyContent:'space-around', flexWrap:'wrap'}}>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="BlockedSite"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="ShieldAlert"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Badge"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Shield"/>
+
+
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Blocked"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Error"/>
+                    <div style={{fontSize:'2em', lineHeight:'2.5em', display:'grid', gridTemplateRows: '1fr', gridAutoColumns:'1fr', alignItems:'center', justifyItems:'center'}}>
+                    <Icon style={{position:'relative', top:0, left: 0, fontSize: '0.5em',lineHeight:'1em', gridRow:'1/2', gridColumn:'1/2'}} iconName="HomeSolid"/>
+
+                    <Icon style={{position:'relative', top:0,  gridRow:'1/2', gridColumn:'1/2'}} iconName="CircleRing"/>
+
+                    </div>  
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Completed"/>
+                    
+
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="SecurityGroup"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="PeopleAlert"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="RecruitmentManagement"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="People"/>
+
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="ProtectedDocument"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="FileBug"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Certificate"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="DocumentApproval"/>
+
+                    
+
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="BlockContact"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="UserWarning"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Signin"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="PartyLeader"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="ReminderPerson"/>
+                    <div style={{width:'32.002px', height:'80px'}}></div>
+                    <div style={{width:'32.002px', height:'80px'}}></div>
+                    <div style={{width:'32.002px', height:'80px'}}></div>
+
+
+                    
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="ProtectRestrict"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Lock"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Unlock"/>
+                    <div style={{width:'32.002px', height:'80px'}}></div>
+
+
+
+                    
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Warning"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Admin"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Permissions"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Fingerprint"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="InternalInvestigation"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="CheckMark"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Globe"/>
+                    <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Megaphone"/>
+                    
+
+                  
+                </div>
             </div>
         );
 
