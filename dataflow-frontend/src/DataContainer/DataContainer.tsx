@@ -10,7 +10,8 @@ type DataContainerProps={
     onSelectedNodeChange:(nodeId: number, event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
     isInput:boolean,
     titleName:string,
-    revealEffectService: RevealEffectService
+    revealEffectService: RevealEffectService,
+    onHoverNodeChange: (nodeId: (number|undefined)) => void
 }
 export class DataContainer extends React.Component<DataContainerProps>{
 
@@ -27,7 +28,7 @@ export class DataContainer extends React.Component<DataContainerProps>{
     render(){
         const links = this.props.links;
         const dataTiles = links.map((value: ILink<number, IDatum>, index: number, array: ILink<number, IDatum>[]) =>
-            <DataTile revealEffectService={this.props.revealEffectService} onSelectedNodeChange={this.props.onSelectedNodeChange} key={value.data.id} link={value} isInput={this.props.isInput}>
+            <DataTile onHoverNodeChange={this.props.onHoverNodeChange} revealEffectService={this.props.revealEffectService} onSelectedNodeChange={this.props.onSelectedNodeChange} key={value.data.id} link={value} isInput={this.props.isInput}>
 
             </DataTile>
            

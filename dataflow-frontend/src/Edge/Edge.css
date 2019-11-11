@@ -1,10 +1,15 @@
-.edge{
-    stroke-dasharray: 1;
+.edge {
+    stroke-dasharray: 0;
+    animation: none;
+}
+
+.edgeAnimation {
+    stroke-dasharray: 2;
     animation: dash 250s linear infinite;
-  }
-  
-  @keyframes dash {
+}
+
+@keyframes dash {
     from {
-      stroke-dashoffset: 1000;
+        stroke-dashoffset: 1000;
     }
-  }
+}

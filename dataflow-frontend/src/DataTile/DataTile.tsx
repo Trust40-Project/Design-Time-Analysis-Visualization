@@ -17,7 +17,8 @@ type DataTileProps = {
     key: number,
     onSelectedNodeChange: (nodeId: number, event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
     isInput: boolean,
-    revealEffectService: RevealEffectService
+    revealEffectService: RevealEffectService,
+    onHoverNodeChange: (nodeId: (number|undefined)) => void
 }
 
 function drawBorderReveal(id:string, event: React.MouseEvent<HTMLElement, MouseEvent>) {
@@ -40,7 +41,7 @@ function removeBorderReveal(id:string, event: React.MouseEvent<HTMLElement, Mous
 
   
 
-const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput, revealEffectService }) => {
+const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput, revealEffectService, onHoverNodeChange }) => {
 
     
     const tooltipId = getId('text-tooltip');
@@ -73,15 +74,20 @@ const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput
                 </div>
                 <div onMouseLeave={(e: React.MouseEvent<HTMLElement, MouseEvent>) => revealEffectService.removeReveal(e)} onMouseMove={(e: React.MouseEvent<HTMLElement, MouseEvent>) => revealEffectService.drawBorderRevealHighlight(e)}  className="dataTileCanvas">
                     <div ref = {ref => {if(ref) revealEffectService.addBorderElement(ref);}} id={'data-tile-canvas-'+link.data.id} className="dataTileBorder">
-                        <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-                                        onSelectedNodeChange(isInput ? link.fromId : link.toId, e);
-                                    }} title={link.data.name} className="dataTileButton">
-                                        <h5 className="dataName">
-                                            {link.data.name}
-                                        </h5>
+                        <button onMouseEnter={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => onHoverNodeChange(isInput ? link.fromId : link.toId)} 
+                                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => onHoverNodeChange(undefined)}
+                                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                                    onHoverNodeChange(undefined);
+                                    onSelectedNodeChange(isInput ? link.fromId : link.toId, e);
+                                }} 
+                                title={link.data.name} 
+                                className="dataTileButton">
+                                    <h5 className="dataName">
+                                        {link.data.name}
+                                    </h5>
 
 
-                                    </button>
+                                </button>
                     </div>
                     
                 </div>

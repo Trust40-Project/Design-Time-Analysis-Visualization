@@ -17,10 +17,12 @@ import {IFlowChart} from '../Models/FlowChart/IFlowChart';
 import { ILayout } from '../Models/NGraph/ILayout';
 
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { number, node } from 'prop-types';
 
 type DataFlowChartState = {
     selectedNodeId: (number|undefined),
-    edgeAnimationOn: boolean
+    edgeAnimationOn: boolean,
+    hoverNodeId: (number|undefined)
 }
 
 export class DataFlowChart extends React.Component<{},DataFlowChartState> {
@@ -28,18 +30,26 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
         super(props);
         this.state = {
             selectedNodeId: undefined,
-            edgeAnimationOn: true
+            edgeAnimationOn: true,
+            hoverNodeId: undefined
             
         }
 
         this.handleSelectedNodeChange = this.handleSelectedNodeChange.bind(this);
         this.handelEdgeAnimationToggle = this.handelEdgeAnimationToggle.bind(this);
+        this.handleHoverNodeChange = this.handleHoverNodeChange.bind(this);
         
     }
 
     handleSelectedNodeChange(nodeId: number){
         this.setState({
             selectedNodeId:(nodeId == this.state.selectedNodeId)?undefined: nodeId,
+        });
+    }
+
+    handleHoverNodeChange(nodeId: (number|undefined)){
+        this.setState({
+            hoverNodeId: nodeId
         });
     }
 
@@ -54,6 +64,8 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
     render(){
         const components: JSX.Element[] = [];
         const selectedNodeId = this.state.selectedNodeId;
+        const hoverNodeId = this.state.hoverNodeId;
+        const edgeAnimationOn = this.state.edgeAnimationOn;
         mockFlowChart.softwareComponents.forEach((component) =>{
             components.push(
                 <SoftwareComponent
@@ -64,6 +76,9 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
                     selectedNodeId={selectedNodeId}
                     onSelectedNodeChange={this.handleSelectedNodeChange}
                     onEdgeAnimationToggle={this.handelEdgeAnimationToggle}
+                    edgeAnimationOn={edgeAnimationOn}
+                    onHoverNodeChange={this.handleHoverNodeChange}
+                    hoverNodeId={hoverNodeId}
                 >
                 </SoftwareComponent>
             );

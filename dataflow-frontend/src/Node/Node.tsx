@@ -21,7 +21,10 @@ type NodeProps = {
     graph: IGraph<number, IOperation, IDatum>,
     isSelected: boolean,
     onSelectedNodeChange: (nodeId: number) => void,
-    onEdgeAnimationToggle: () => void
+    onEdgeAnimationToggle: () => void,
+    edgeAnimationOn:boolean,
+    onHoverNodeChange: (nodeId: (number|undefined)) => void,
+    hoverNodeId: (number|undefined)
 
 }
 
@@ -147,6 +150,7 @@ export class Node extends React.Component<NodeProps, NodeState> {
                 nodeWidth={this.state.width}
                 nodeHeight={this.state.height}   
                 onEdgeAnimationToggle={this.props.onEdgeAnimationToggle} 
+                edgeAnimationOn={this.props.edgeAnimationOn}
             ></Edge>
         ));
 
@@ -157,8 +161,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
             <section>
                 <div  onMouseLeave={this.removeBorderRevealHighlight} onMouseMove={this.drawBorderRevealHighlight} className={"nodeArea "+cssLargeNodeClass} style={{ top: leftTopCorner.y + 'em', left: leftTopCorner.x + 'em' }}>
-                    <div ref = {ref => this.nodeBorder = ref} id={"node-border-"+node.id} className="nodeBorder">
-                        <div id={"node-container-"+node.id} onMouseLeave={this.removeRevealHighlight} onMouseMove={this.drawRevealHighlight} className="nodeContainer">
+                    <div ref = {ref => this.nodeBorder = ref} id={"node-border-"+node.id} className={"nodeBorder "+ ((this.props.hoverNodeId === node.id)? 'nodeHover':'')}>
+                        <div id={"node-container-"+node.id} onMouseLeave={this.removeRevealHighlight} onMouseMove={this.drawRevealHighlight} className={"nodeContainer "}>
                             <button tabIndex={node.id} onClick={this.handleSelectedNodeChange.bind(this, node.id)} className={"nodeButton blur "+cssNodeSelectedButtonClass}>
                                 {this.renderNodeTitle()}
                             </button>
@@ -215,9 +219,9 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
             return (
                 <div className='nodeContent'>
-                        <DataContainer revealEffectService={this.revealEffectService} isInput={true} onSelectedNodeChange={this.handleSelectedNodeChange} links={input} titleName="Input"></DataContainer>
+                        <DataContainer onHoverNodeChange={this.props.onHoverNodeChange} revealEffectService={this.revealEffectService} isInput={true} onSelectedNodeChange={this.handleSelectedNodeChange} links={input} titleName="Input"></DataContainer>
 
-                        <DataContainer revealEffectService={this.revealEffectService} isInput={false} onSelectedNodeChange={this.handleSelectedNodeChange} links={output} titleName="Output"></DataContainer>
+                        <DataContainer onHoverNodeChange={this.props.onHoverNodeChange} revealEffectService={this.revealEffectService} isInput={false} onSelectedNodeChange={this.handleSelectedNodeChange} links={output} titleName="Output"></DataContainer>
                 </div>
 
             );
