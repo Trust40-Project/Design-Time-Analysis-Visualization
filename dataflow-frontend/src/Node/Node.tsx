@@ -166,15 +166,15 @@ export class Node extends React.Component<NodeProps, NodeState> {
             <section>
                 <div  onMouseLeave={this.removeBorderRevealHighlight} onMouseMove={this.drawBorderRevealHighlight} className={"nodeArea "+cssLargeNodeClass} style={{ top: leftTopCorner.y + 'em', left: leftTopCorner.x + 'em' }}>
                     <div ref = {ref => this.nodeBorder = ref} id={"node-border-"+node.id} className={"nodeBorder "+ ((this.props.hoverNodeId === node.id)? 'nodeHover':'')}>
+                        <div  className="nodeBackgroundGradient">
                         <div id={"node-container-"+node.id} onMouseLeave={this.removeRevealHighlight} onMouseMove={this.drawRevealHighlight} className={"nodeContainer "}>
                             <button tabIndex={node.id} onClick={this.handleSelectedNodeChange.bind(this, node.id)} className={"nodeButton blur "+cssNodeSelectedButtonClass}>
                                 {this.renderNodeTitle()}
                             </button>
                             {this.renderNodeContent()}
                         </div>
-
+                        </div>
                     </div>
-
                 </div>
                 {toDisplay}
             </section>

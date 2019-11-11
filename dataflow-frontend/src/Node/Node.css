@@ -36,26 +36,40 @@
     transition: box-shadow 0.5s;
 }
 
+.nodeBackgroundGradient {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-image: linear-gradient(#15EDED, #029CF5);
+    /*background-color: orange;*/
+    border-radius: 5px;
+}
+
 .nodeContainer {
     width: 100%;
     height: 100%;
     padding: 0;
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
-    background-color: var(--color-primary);
+    /*border-radius: 5px;*/
+    border-radius: 0;
+    background-color: transparent;
+    /*background-color: var(--color-primary);*/
     overflow: hidden;
 }
 
 .nodeButton {
     width: 100%;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 0;
     border: none;
 }
 
 .nodeButton:focus {
     border-color: var(--color-reveal-highlight-border);
+    border-radius: 5px;
 }
 
 .nodeSelectedButton {
