@@ -7,6 +7,9 @@ import { ILink } from '../Models/NGraph/ILink';
 import { RevealEffectService } from '../RevealEffect/RevealEffectService';
 import './DataTile.css';
 import {IComponentStyles} from '@uifabric/foundation';
+import { PrivacyLevels } from '../Models/PrivacyLevel/PrivacyLevels';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
+
 
 const InputIcon = () => <Icon iconName="Export" />;
 const OutputIcon = () => <Icon iconName="Import"/>;
@@ -55,13 +58,14 @@ const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput
                         <span>
                             
                         <TooltipHost
-                                    content={link.data.privacyLevelCalculation}
+                                    content={PrivacyLevels[link.data.privacyLevel] + " = " + link.data.privacyLevelCalculation}
                                     id={tooltipId}
                                     tooltipProps={{ styles:{ subText:{color:'var(--color-text-default)'}}, style: { overflowY: 'auto' },maxWidth:"16em"}}
                                    
                                     calloutProps={{backgroundColor:'var(--color-tertiary)', styles:{beakCurtain:{backgroundColor:'var(--color-tertiary)'}}}}
                                 >
-                                    <LockIcon aria-describedby={tooltipId}/>
+                                    <LockIcon aria-describedby={tooltipId} />
+
                                 </TooltipHost>
                         </span>
 

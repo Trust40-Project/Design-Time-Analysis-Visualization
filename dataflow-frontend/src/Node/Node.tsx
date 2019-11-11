@@ -14,6 +14,9 @@ import { DataContainer } from '../DataContainer/DataContainer';
 import {Depths} from '@uifabric/fluent-theme/lib/fluent/FluentDepths'
 import { IRevealChild } from '../RevealEffect/RevealEffect';
 import { RevealEffectService } from '../RevealEffect/RevealEffectService';
+import { getId } from '@uifabric/utilities';
+import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 type NodeProps = {
     node: INode<number, IOperation>,
     key: number,
@@ -37,6 +40,7 @@ type NodeState  = {
 export class Node extends React.Component<NodeProps, NodeState> {
     private readonly revealEffectService: RevealEffectService = new RevealEffectService();
     private nodeBorder: HTMLElement|null = null;
+    
 
     constructor(props: NodeProps) {
         super(props);
@@ -219,6 +223,9 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
             return (
                 <div className='nodeContent'>
+
+
+
                         <DataContainer onHoverNodeChange={this.props.onHoverNodeChange} revealEffectService={this.revealEffectService} isInput={true} onSelectedNodeChange={this.handleSelectedNodeChange} links={input} titleName="Input"></DataContainer>
 
                         <DataContainer onHoverNodeChange={this.props.onHoverNodeChange} revealEffectService={this.revealEffectService} isInput={false} onSelectedNodeChange={this.handleSelectedNodeChange} links={output} titleName="Output"></DataContainer>
