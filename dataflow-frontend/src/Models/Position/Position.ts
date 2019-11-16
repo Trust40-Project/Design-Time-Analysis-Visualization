@@ -22,4 +22,8 @@ export class Position implements IPosition{
     public set y(value: number) {
         this._y = value;
     }
+
+    public toString(): string{
+        return this.x + "," + this.y;
+    }
 }

@@ -1,12 +1,45 @@
 .edge {
     stroke-dasharray: 0;
     animation: none;
+    marker-mid:url(#arrowhead);
+    stroke:transparent; 
+    fill:none; 
+    stroke-width:0.4;
 }
 
+.edge:hover{
+    cursor: pointer;
+}
+/*
 .edgeAnimation {
     stroke-dasharray: 2;
     animation: dash 250s linear infinite;
+}*/
+
+.edgeAnimation{
+    stroke: var(--color-border);
+    stroke-width: 0.4;
+    stroke-linecap:round;
+
+    marker-mid: none;
+    stroke-dasharray: 2;
+    animation: dash 250s linear infinite;
 }
+
+
+.edgeArrowHead{
+    stroke:var(--color-border); 
+    stroke-width:0.8; 
+    fill:none;
+    fill-rule:evenodd;
+    clip-rule:evenodd;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:1.5;
+}
+
+
+
 
 @keyframes dash {
     from {
