@@ -58,7 +58,7 @@ const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput
                         <span>
                             
                         <TooltipHost
-                                    content={PrivacyLevels[link.data.privacyLevel] + " = " + link.data.privacyLevelCalculation}
+                                    content={PrivacyLevels[link.data.privacyLevel] + (isInput? '' :' = ' + link.data.privacyLevelCalculation)}
                                     id={tooltipId}
                                     tooltipProps={{ styles:{ subText:{color:'var(--color-text-default)'}}, style: { overflowY: 'auto' },maxWidth:"16em"}}
                                    
