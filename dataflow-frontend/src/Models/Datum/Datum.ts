@@ -1,7 +1,9 @@
-import { PrivacyLevels } from "../PrivacyLevel/PrivacyLevels";
+import { PrivacyLevels, PrivacyLevelPublic } from "../PrivacyLevel/PrivacyLevels";
 import { INode } from "../NGraph/INode";
 import { Operation } from "../Operation/Operation";
 import { IDatum } from "./IDatum";
+import { IPrivacyLevel } from "../PrivacyLevel/IPrivacyLevel";
+import { PrivacyLevelFactory } from "../PrivacyLevel/PrivacyLevelFactory";
 
 export class Datum implements IDatum {
     public get privacyLevelCalculation(): string {
@@ -17,16 +19,16 @@ export class Datum implements IDatum {
   private _privacyLevelCalculation: string = '';
 
     
-   private _privacyLevel: PrivacyLevels = PrivacyLevels.PRIVATE;
+   private _privacyLevel: IPrivacyLevel = new PrivacyLevelPublic();
 
    
   
 
-   constructor(name: string = 'Datum',privacyLevelCalculation:string ='', privacyLevel: PrivacyLevels= PrivacyLevels.PRIVATE, id:number = Datum.idCount){
+   constructor(name: string = 'Datum',privacyLevelCalculation:string ='', privacyLevel: PrivacyLevels= PrivacyLevels.PUBLIC, id:number = Datum.idCount){
        
         this.name = name;
         this.privacyLevelCalculation = privacyLevelCalculation;
-       this.privacyLevel = privacyLevel;
+       this.privacyLevel = new PrivacyLevelFactory().getPrivacyLevel(privacyLevel);
        this._id = id;
        
        Datum.idCount++;
@@ -45,10 +47,10 @@ public set name(value: string) {
     this._name = value;
 }
 
-   public get privacyLevel(): PrivacyLevels {
+   public get privacyLevel(): IPrivacyLevel {
     return this._privacyLevel;
 }
-public set privacyLevel(value: PrivacyLevels) {
+public set privacyLevel(value: IPrivacyLevel) {
     this._privacyLevel = value;
 }
 

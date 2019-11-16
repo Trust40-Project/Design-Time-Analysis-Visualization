@@ -251,9 +251,9 @@ function createMockGraph(){
     graph.addLink(filter.id, project.id, new Datum("worker Location","min(Input, OFFICIAL)", PrivacyLevels.SENSITIVE));
     graph.addLink(project.id, calcDist.id,new Datum("location","min(Input, OFFICIAL)", PrivacyLevels.SENSITIVE) );
     graph.addLink(workplaces.id, filter1.id,new Datum("workplace[]","min(Input, OFFICIAL)", PrivacyLevels.PUBLIC) );
-    graph.addLink(filter1.id, project1.id,new Datum("workplace","min(Input, OFFICIAL)", PrivacyLevels.PUBLIC) );
+    graph.addLink(filter1.id, project1.id,new Datum("workplace","min(Input, OFFICIAL)", PrivacyLevels.HIGHLYSENSITIVE) );
     graph.addLink(project1.id, calcDist.id, new Datum("location","min(Input, OFFICIAL)", PrivacyLevels.PUBLIC));
-    graph.addLink(calcDist.id, supervisor.id,new Datum("distance","min(Input, OFFICIAL)", PrivacyLevels.PRIVATE) );
+    graph.addLink(calcDist.id, supervisor.id,new Datum("distance","min(Input, OFFICIAL)", PrivacyLevels.INTERNALUSE) );
 
     var physicsSettings = {
         springLength: 20,
