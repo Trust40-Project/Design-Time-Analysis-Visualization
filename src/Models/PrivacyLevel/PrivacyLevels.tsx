@@ -1,6 +1,6 @@
-import { IPrivacyLevel } from "./IPrivacyLevel";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import React from "react";
+import { IPrivacyLevel } from "./IPrivacyLevel";
 
 export enum PrivacyLevels{
     PUBLIC,
