@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to run
 
+1. Make sure you have Node installed
+2. Navigate to the root of this project
+3. Run 'npm install' on the first time
+4. Run 'npm start' 
 ## Dependencies
 
 * [Fluent Design](https://www.microsoft.com/design/fluent/#/web) for the privacy level icons and the tooltip flyout. 
