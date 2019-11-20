@@ -3,7 +3,7 @@ import { INode } from "../NGraph/INode";
 import { Operation } from "../Operation/Operation";
 import { IDatum } from "./IDatum";
 import { IPrivacyLevel } from "../PrivacyLevel/IPrivacyLevel";
-import { PrivacyLevelFactory } from "../PrivacyLevel/PrivacyLevelFactory";
+import { PrivacyLevelFactory, PrivacyLevelFactoryShield } from "../PrivacyLevel/PrivacyLevelFactory";
 
 export class Datum implements IDatum {
     public get privacyLevelCalculation(): string {

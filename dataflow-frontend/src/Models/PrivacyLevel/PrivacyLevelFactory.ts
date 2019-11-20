@@ -1,4 +1,4 @@
-import { PrivacyLevels, PrivacyLevelPublic, PrivacyLevelInternalUse, PrivacyLevelSensitive, PrivacyLevelHighlySensitive } from "./PrivacyLevels";
+import { PrivacyLevels, PrivacyLevelPublic, PrivacyLevelInternalUse, PrivacyLevelSensitive, PrivacyLevelHighlySensitive, PrivacyLevelPublicShield, PrivacyLevelInternalUseShield, PrivacyLevelSensitiveShield, PrivacyLevelHighlySensitiveShield } from "./PrivacyLevels";
 import { IPrivacyLevel } from "./IPrivacyLevel";
 
 export class PrivacyLevelFactory {
@@ -11,7 +11,7 @@ export class PrivacyLevelFactory {
                 return new PrivacyLevelInternalUse();
                 break;
             case PrivacyLevels.SENSITIVE:
-                return new PrivacyLevelSensitive;
+                return new PrivacyLevelSensitive();
                 break;
             case PrivacyLevels.HIGHLYSENSITIVE:
                 return new PrivacyLevelHighlySensitive();
@@ -20,6 +20,30 @@ export class PrivacyLevelFactory {
 
             default:
                 return new PrivacyLevelPublic();
+                break;
+        }
+    }
+}
+
+export class PrivacyLevelFactoryShield{
+    public getPrivacyLevel(privacyLevel: PrivacyLevels): IPrivacyLevel {
+        switch (privacyLevel) {
+            case PrivacyLevels.PUBLIC:
+                return new PrivacyLevelPublicShield();
+                break;
+            case PrivacyLevels.INTERNALUSE:
+                return new PrivacyLevelInternalUseShield();
+                break;
+            case PrivacyLevels.SENSITIVE:
+                return new PrivacyLevelSensitiveShield();
+                break;
+            case PrivacyLevels.HIGHLYSENSITIVE:
+                return new PrivacyLevelHighlySensitiveShield();
+                break;
+
+
+            default:
+                return new PrivacyLevelPublicShield();
                 break;
         }
     }

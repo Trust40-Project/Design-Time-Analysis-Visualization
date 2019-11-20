@@ -90,13 +90,9 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
                 </SoftwareComponent>
             );
         })
-        
-        
-        return(
-            <div onMouseMove={this.drawBorderRevealHighlight} style={{minHeight:'100vh', minWidth:'100vw', position:'fixed', top:0, left:0, overflow:'auto'}}>
-                {components}
-
-                <div style={{display: 'flex', width:'160px', height:'40em', justifyContent:'space-around', flexWrap:'wrap'}}>
+        /*
+          Icon test:
+          <div style={{display: 'flex', width:'160px', height:'40em', justifyContent:'space-around', flexWrap:'wrap'}}>
                     <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="BlockedSite"/>
                     <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="ShieldAlert"/>
                     <Icon style={{fontSize:'2em', lineHeight:'2.5em'}} iconName="Badge"/>
@@ -157,6 +153,13 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
 
                   
                 </div>
+         */
+        
+        return(
+            <div onMouseMove={this.drawBorderRevealHighlight} style={{minHeight:'100vh', minWidth:'100vw', position:'fixed', top:0, left:0, overflow:'auto'}}>
+                {components}
+
+                
             </div>
         );
 
