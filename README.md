@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Dependencies
+
+* [Fluent Design](https://www.microsoft.com/design/fluent/#/web) for the privacy level icons and the tooltip flyout. 
+
+* [ngraph](https://github.com/anvaka/ngraph.graph) graph library for layout.
+
 ## Available Scripts
 
 In the project directory, you can run:
