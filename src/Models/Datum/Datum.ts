@@ -1,9 +1,7 @@
-import { PrivacyLevels, PrivacyLevelPublic } from "../PrivacyLevel/PrivacyLevels";
-import { INode } from "../NGraph/INode";
-import { Operation } from "../Operation/Operation";
-import { IDatum } from "./IDatum";
 import { IPrivacyLevel } from "../PrivacyLevel/IPrivacyLevel";
 import { PrivacyLevelFactory } from "../PrivacyLevel/PrivacyLevelFactory";
+import { PrivacyLevelPublic, PrivacyLevels } from "../PrivacyLevel/PrivacyLevels";
+import { IDatum } from "./IDatum";
 
 /**
  * Inplements a certain datum.

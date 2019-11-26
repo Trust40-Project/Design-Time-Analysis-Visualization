@@ -1,15 +1,13 @@
 import React from 'react';
-import './SoftwareComponent.css';
-import {ISoftwareComponent} from '../Models/FlowChart/ISoftwareComponent';
-import {Node} from '../Node/Node';
-import Edge from '../Edge/Edge';
-import { INode } from '../Models/NGraph/INode';
-import { ILayout } from '../Models/NGraph/ILayout';
-import { IOperation } from '../Models/Operation/IOperation';
-import { IGraph } from '../Models/NGraph/IGraph';
 import { IDatum } from '../Models/Datum/IDatum';
-import { RevealEffect } from '../RevealEffect/RevealEffect';
+import { ISoftwareComponent } from '../Models/FlowChart/ISoftwareComponent';
+import { IGraph } from '../Models/NGraph/IGraph';
+import { ILayout } from '../Models/NGraph/ILayout';
+import { INode } from '../Models/NGraph/INode';
+import { IOperation } from '../Models/Operation/IOperation';
+import { Node } from '../Node/Node';
 import { RevealEffectService } from '../RevealEffect/RevealEffectService';
+import './SoftwareComponent.css';
 
 type SoftwareComponentProps = {
     component: ISoftwareComponent,

@@ -1,10 +1,7 @@
 import React from 'react';
-import './Edge.css';
-import { IDatum } from '../Models/Datum/IDatum';
 import { IPosition } from '../Models/Position/IPosition';
 import { Position } from '../Models/Position/Position';
-import { anchorFactory, IAnchor, IAnchorPosition } from '../Models/Position/Anchor';
-import { Node } from '../Node/Node';
+import './Edge.css';
 
 type EdgeProps = {
     /**

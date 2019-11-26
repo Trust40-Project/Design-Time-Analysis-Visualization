@@ -18,19 +18,19 @@ export class PrivacyLevelFactory {
         switch (privacyLevel) {
             case PrivacyLevels.PUBLIC:
                 return new PrivacyLevelPublic();
-                break;
+                
             case PrivacyLevels.INTERNALUSE:
                 return new PrivacyLevelInternalUse();
-                break;
+                
             case PrivacyLevels.SENSITIVE:
                 return new PrivacyLevelSensitive();
-                break;
+                
             case PrivacyLevels.HIGHLYSENSITIVE:
                 return new PrivacyLevelHighlySensitive();
-                break;
+                
             default:
                 return new PrivacyLevelPublic();
-                break;
+                
         }
     }
 }

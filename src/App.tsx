@@ -1,7 +1,6 @@
 import React from 'react';
-import {DataFlowChart} from './DataFlowChart/DataFlowChart';
-import logo from './logo.svg';
 import './App.css';
+import { DataFlowChart } from './DataFlowChart/DataFlowChart';
 
 
 const App: React.FC = () => {

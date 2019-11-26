@@ -1,22 +1,15 @@
 import React from 'react';
-import './Node.css'
+import { DataContainer } from '../DataContainer/DataContainer';
+import Edge from '../Edge/Edge';
+import { IDatum } from '../Models/Datum/IDatum';
+import { IGraph } from '../Models/NGraph/IGraph';
+import { ILayout } from '../Models/NGraph/ILayout';
 import { INode } from '../Models/NGraph/INode';
+import { IOperation } from '../Models/Operation/IOperation';
 import { IPosition } from '../Models/Position/IPosition';
 import { Position } from '../Models/Position/Position';
-import { IOperation } from '../Models/Operation/IOperation';
-import { IDatum } from '../Models/Datum/IDatum';
-import { ILayout } from '../Models/NGraph/ILayout';
-import { IGraph } from '../Models/NGraph/IGraph';
-import Edge from '../Edge/Edge';
-import { JSXElement, identifier } from '@babel/types';
-import { ILink } from '../Models/NGraph/ILink';
-import { DataContainer } from '../DataContainer/DataContainer';
-import {Depths} from '@uifabric/fluent-theme/lib/fluent/FluentDepths'
-import { IRevealChild } from '../RevealEffect/RevealEffect';
 import { RevealEffectService } from '../RevealEffect/RevealEffectService';
-import { getId } from '@uifabric/utilities';
-import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import './Node.css';
 
 type NodeProps = {
     node: INode<number, IOperation>,

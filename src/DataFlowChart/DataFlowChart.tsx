@@ -1,24 +1,19 @@
 import React from 'react';
-import './DataFlowChart.css';
-import { ISoftwareComponent } from '../Models/FlowChart/ISoftwareComponent';
-import { SoftwareComponent as SoftwareComponentModel } from '../Models/FlowChart/SoftwareComponent';
-import {SoftwareComponent} from '../SoftwareComponent/SoftwareComponent';
-import { Operation } from '../Models/Operation/Operation';
-import { Position } from '../Models/Position/Position';
 import { Datum } from '../Models/Datum/Datum';
-import { PrivacyLevels } from '../Models/PrivacyLevel/PrivacyLevels';
-import { isNode } from '@babel/types';
-import { INode } from '../Models/NGraph/INode';
-import { IGraph } from '../Models/NGraph/IGraph';
-import { IOperation } from '../Models/Operation/IOperation';
 import { IDatum } from '../Models/Datum/IDatum';
 import { FlowChart } from '../Models/FlowChart/FlowChart';
-import {IFlowChart} from '../Models/FlowChart/IFlowChart';
+import { IFlowChart } from '../Models/FlowChart/IFlowChart';
+import { ISoftwareComponent } from '../Models/FlowChart/ISoftwareComponent';
+import { SoftwareComponent as SoftwareComponentModel } from '../Models/FlowChart/SoftwareComponent';
+import { IGraph } from '../Models/NGraph/IGraph';
 import { ILayout } from '../Models/NGraph/ILayout';
-
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { number, node } from 'prop-types';
+import { IOperation } from '../Models/Operation/IOperation';
+import { Operation } from '../Models/Operation/Operation';
+import { PrivacyLevels } from '../Models/PrivacyLevel/PrivacyLevels';
 import { RevealEffectService } from '../RevealEffect/RevealEffectService';
+import { SoftwareComponent } from '../SoftwareComponent/SoftwareComponent';
+import './DataFlowChart.css';
+
 
 type DataFlowChartState = {
     /**
@@ -62,7 +57,7 @@ export class DataFlowChart extends React.Component<{},DataFlowChartState> {
 
     handleSelectedNodeChange(nodeId: number){
         this.setState({
-            selectedNodeId:(nodeId == this.state.selectedNodeId)?undefined: nodeId,
+            selectedNodeId:(nodeId === this.state.selectedNodeId)?undefined: nodeId,
         });
     }
 

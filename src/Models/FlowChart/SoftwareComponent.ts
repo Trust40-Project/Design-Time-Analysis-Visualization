@@ -85,52 +85,52 @@ export class SoftwareComponent implements ISoftwareComponent {
         switch (this.id % 15) {
             case 0:
                 return 'red';
-                break;
+
             case 1:
                 return 'orange';
-                break;
+
             case 2:
                 return 'yellow';
-                break;
+
             case 3:
                 return 'pink';
-                break;
+
             case 4:
                 return 'blue';
-                break;
+
             case 5:
                 return 'red-dark';
-                break;
+
             case 6:
                 return 'orange-dark';
-                break;
+
             case 7:
                 return 'yellow-dark';
-                break;
+
             case 8:
                 return 'pink-dark';
-                break;
+
             case 9:
                 return 'blue-dark';
-                break;
+
             case 10:
                 return 'red-light';
-                break;
+
             case 11:
                 return 'orange-light';
-                break;
+
             case 12:
                 return 'yellow-light';
-                break;
+
             case 13:
                 return 'pink-light';
-                break;
+
             case 14:
                 return 'blue-light';
-                break;
+
             default:
                 return 'primary';
-                break;
+
         }
     }
 

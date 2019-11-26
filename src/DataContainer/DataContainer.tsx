@@ -37,11 +37,6 @@ type DataContainerProps={
  */
 export class DataContainer extends React.Component<DataContainerProps>{
 
-    constructor(props: DataContainerProps){
-        super(props);
-        
-    }
-
    
 
     render(){

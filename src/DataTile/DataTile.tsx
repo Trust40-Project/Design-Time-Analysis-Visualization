@@ -1,14 +1,11 @@
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { TooltipHost, ITooltipStyleProps, ITooltipHostStyles, ITooltipStyles } from 'office-ui-fabric-react/lib/Tooltip';
+import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
 import { getId } from 'office-ui-fabric-react/lib/Utilities';
 import React from 'react';
 import { IDatum } from '../Models/Datum/IDatum';
 import { ILink } from '../Models/NGraph/ILink';
 import { RevealEffectService } from '../RevealEffect/RevealEffectService';
 import './DataTile.css';
-import {IComponentStyles} from '@uifabric/foundation';
-import { PrivacyLevels } from '../Models/PrivacyLevel/PrivacyLevels';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 
 
 const InputIcon = () => <Icon iconName="Export" />;
