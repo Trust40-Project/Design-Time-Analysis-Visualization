@@ -29,7 +29,8 @@ type NodeProps = {
     edgeAnimationOn:boolean,
     onHoverNodeChange: (nodeId: (number|undefined)) => void,
     hoverNodeId: (number|undefined),
-    nodeRevealEffectService: RevealEffectService
+    nodeRevealEffectService: RevealEffectService,
+    color: string
 
 }
 
@@ -48,6 +49,8 @@ type NodeState  = {
 export class Node extends React.Component<NodeProps, NodeState> {
     private readonly revealEffectService: RevealEffectService = new RevealEffectService();
     private nodeBorder: HTMLElement|null = null;
+
+    private nodeContainer: HTMLElement|null = null;
     
 
     constructor(props: NodeProps) {
@@ -57,53 +60,68 @@ export class Node extends React.Component<NodeProps, NodeState> {
             height: this.props.isSelected ? 20 : 5,
         }
         this.handleSelectedNodeChange = this.handleSelectedNodeChange.bind(this);
-        this.drawBorderRevealHighlight = this.drawBorderRevealHighlight.bind(this);
-        this.removeBorderRevealHighlight = this.removeBorderRevealHighlight.bind(this);
+        this.drawDataTileBorderRevealHighlight = this.drawDataTileBorderRevealHighlight.bind(this);
+        this.removeDataTileBorderRevealHighlight = this.removeDataTileBorderRevealHighlight.bind(this);
         this.drawRevealHighlight = this.drawRevealHighlight.bind(this);
         this.removeRevealHighlight = this.removeRevealHighlight.bind(this);
 
     }
 
-    drawBorderRevealHighlight(event:React.MouseEvent<HTMLElement, MouseEvent>){
-        const nodeBorder = document.getElementById('node-border-'+this.props.node.id);
-        if(nodeBorder){
-            event.target = nodeBorder; 
-            this.props.nodeRevealEffectService.drawBorderRevealHighlight(event);
-        }
+    /**
+     * Provides functionality for all children to draw border reveal highlight.
+     * @param event trigger for border reveal highlight removal.
+     */
+    drawDataTileBorderRevealHighlight(event:React.MouseEvent<HTMLElement, MouseEvent>){
+            this.revealEffectService.drawBorderRevealHighlight(event);
+
     }
 
-    removeBorderRevealHighlight(event: React.MouseEvent<HTMLElement, MouseEvent>){
-        const nodeBorder = document.getElementById('node-border-'+this.props.node.id);
-        if(nodeBorder){
-            event.target = nodeBorder; 
+    /**
+     * Provides functionality for all children to remove border reveal highlight.
+     * @param event trigger to remove border reveal highlight for children.
+     */
+    removeDataTileBorderRevealHighlight(event: React.MouseEvent<HTMLElement, MouseEvent>){
            this.revealEffectService.removeBorderRevealHighlight(event);
-           this.props.nodeRevealEffectService.removeBorderRevealHighlight(event);
-
-        }
     }
 
+    /**
+     * Draws the reaveal highlight for this node.
+     * @param event trigger to draw reveal highlight.
+     */
     drawRevealHighlight(event:React.MouseEvent<HTMLElement, MouseEvent>){
-        const nodeContainer = document.getElementById('node-container-'+this.props.node.id);
-        if(nodeContainer){
-            event.target = nodeContainer; 
+        if(this.nodeContainer){
+            event.target = this.nodeContainer; 
             this.props.nodeRevealEffectService.addRevealHighlight(event);
         }
     }
 
+    /**
+     * Removes the reveal highlight from this node.
+     * @param event that triggered the removal.
+     */
     removeRevealHighlight(event: React.MouseEvent<HTMLElement, MouseEvent>){
-        const nodeContainer = document.getElementById('node-container-'+this.props.node.id);
-        if(nodeContainer){
-            event.target = nodeContainer; 
+        if(this.nodeContainer){
+            event.target = this.nodeContainer; 
             this.props.nodeRevealEffectService.removeReveal(event);
         }
     }
 
+    /**
+     * To navigate to a different node.
+     * @param selectedNodeId of the node that was selected.
+     * @param event trigger for node selection.
+     */
     handleSelectedNodeChange(selectedNodeId:number, event:React.MouseEvent<HTMLElement, MouseEvent>) {
        
        this.props.onSelectedNodeChange(selectedNodeId);
 
        this.removeRevealHighlight(event);
-       this.removeBorderRevealHighlight(event);
+       if(this.nodeContainer){
+        event.target = this.nodeContainer; 
+        this.props.nodeRevealEffectService.removeReveal(event);
+        }
+       this.props.nodeRevealEffectService.removeBorderRevealHighlight(event);
+
        
     }
 
@@ -136,6 +154,7 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const toDisplay: JSX.Element[] = [];
         const cssLargeNodeClass: string = this.props.isSelected ? 'largenode' : '';
         const cssNodeSelectedButtonClass: string = this.props.isSelected? 'nodeSelectedButton':'';
+        const color = this.props.color;
 
         edges.forEach(value => toDisplay.push(
             <Edge 
@@ -154,8 +173,8 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
             <section>
                 <div className={"nodeArea "+cssLargeNodeClass} style={{ top: leftTopCorner.y + 'em', left: leftTopCorner.x + 'em' }}>
-                    <div ref = {ref => this.nodeBorder = ref} id={"node-border-"+node.id} className={"nodeBorder "+ ((this.props.hoverNodeId === node.id)? 'nodeHover':'')}>
-                        <div id={"node-container-"+node.id} onMouseLeave={this.removeRevealHighlight} onMouseMove={this.drawRevealHighlight} className={"nodeContainer "}>
+                    <div ref = {ref => this.nodeBorder = ref} style={{backgroundColor: 'var(--color-'+color+')'}} className={"nodeBorder "+ ((this.props.hoverNodeId === node.id)? 'nodeHover':'')}>
+                        <div ref = {ref => this.nodeContainer = ref} onMouseLeave={this.removeRevealHighlight} onMouseMove={this.drawRevealHighlight} style={{backgroundColor: 'var(--color-'+color+')'}} className={"nodeContainer "}>
                             <button tabIndex={node.id} onClick={this.handleSelectedNodeChange.bind(this, node.id)} className={"nodeButton blur "+cssNodeSelectedButtonClass}>
                                 {this.renderNodeTitle()}
                             </button>
@@ -204,9 +223,9 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
 
 
-                        <DataContainer onHoverNodeChange={this.props.onHoverNodeChange} revealEffectService={this.revealEffectService} isInput={true} onSelectedNodeChange={this.handleSelectedNodeChange} links={input} titleName="Input"></DataContainer>
+                        <DataContainer removeBorderRevealHighlight={this.removeDataTileBorderRevealHighlight} drawBorderRevealHighlight={this.drawDataTileBorderRevealHighlight} onHoverNodeChange={this.props.onHoverNodeChange} revealEffectService={this.revealEffectService} isInput={true} onSelectedNodeChange={this.handleSelectedNodeChange} links={input} titleName="Input"></DataContainer>
 
-                        <DataContainer onHoverNodeChange={this.props.onHoverNodeChange} revealEffectService={this.revealEffectService} isInput={false} onSelectedNodeChange={this.handleSelectedNodeChange} links={output} titleName="Output"></DataContainer>
+                        <DataContainer removeBorderRevealHighlight={this.removeDataTileBorderRevealHighlight} drawBorderRevealHighlight={this.drawDataTileBorderRevealHighlight} onHoverNodeChange={this.props.onHoverNodeChange} revealEffectService={this.revealEffectService} isInput={false} onSelectedNodeChange={this.handleSelectedNodeChange} links={output} titleName="Output"></DataContainer>
                 </div>
 
             );

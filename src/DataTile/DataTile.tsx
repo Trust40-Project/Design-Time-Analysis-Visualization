@@ -31,6 +31,9 @@ type DataTileProps = {
      * Whether or not this datum is input or output of an operation.
      */
     isInput: boolean,
+    /**
+     * Reveal effect service this data tile can register with.
+     */
     revealEffectService: RevealEffectService,
     /**
      * When hovering over this data tile the corresponding node/operation should be highlighted.
@@ -55,7 +58,7 @@ const DataTile: React.FC<DataTileProps> = ({ link, onSelectedNodeChange, isInput
 
         <div className="dataTile">
             <div className="dataTileContent">
-                <div onMouseLeave={(e: React.MouseEvent<HTMLElement, MouseEvent>) => revealEffectService.removeReveal(e)} onMouseMove={(e: React.MouseEvent<HTMLElement, MouseEvent>) => revealEffectService.drawBorderRevealHighlight(e)} className="iconContainer">
+                <div   className="iconContainer">
                     <div ref = {ref => {if(ref) revealEffectService.addBorderElement(ref);}} id={'icon-oval-border-'+link.data.id} className="iconOvalBorder">
                         <div className="iconOval">
                         <span>

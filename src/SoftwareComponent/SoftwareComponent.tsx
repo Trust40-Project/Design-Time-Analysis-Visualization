@@ -39,6 +39,7 @@ export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
         const component = this.props.component;
        const layout = this.props.layout;
        const graph = this.props.graph;
+       const color = this.props.component.getColor();
 
        const nodes = component.nodes.map((value: INode<number, IOperation>, index: number, array: INode<number, IOperation>[]) =>
             <Node
@@ -53,6 +54,7 @@ export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
                 onHoverNodeChange={this.props.onHoverNodeChange}
                 hoverNodeId={this.props.hoverNodeId}
                 nodeRevealEffectService={this.props.revealEffectService}
+                color={color}
             ></Node>
         );
 

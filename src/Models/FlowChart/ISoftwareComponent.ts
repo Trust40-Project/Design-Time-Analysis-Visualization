@@ -13,4 +13,9 @@ export interface ISoftwareComponent {
     id: number;
     name: string;
     nodes: Array<INode<number, IOperation>>;
+
+    /**
+     * @returns a color to associate this component with.
+     */
+    getColor(): string;
 }

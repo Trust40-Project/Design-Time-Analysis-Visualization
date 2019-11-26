@@ -9,13 +9,14 @@ import { IOperation } from "../Operation/IOperation";
  * @see IOperation
  * @author Malte Reimann
  */
-export class SoftwareComponent implements ISoftwareComponent{
+export class SoftwareComponent implements ISoftwareComponent {
     private static idCount: number = 0;
-    private _id: number = SoftwareComponent.idCount;    
+    private _id: number = SoftwareComponent.idCount;
     private _name: string = '';
     private _nodes: Array<INode<number, IOperation>> = [];
-    
-    
+    private _color: string;
+
+
 
     /**
      * 
@@ -27,16 +28,17 @@ export class SoftwareComponent implements ISoftwareComponent{
      * @param id an unique identifier for this software component.
      * @default id manage internally.
      */
-    constructor(name: string='software component', nodes: Array<INode<number, IOperation>> = [],id: number = SoftwareComponent.idCount,){
+    constructor(name: string = 'software component', nodes: Array<INode<number, IOperation>> = [], id: number = SoftwareComponent.idCount, ) {
         this.name = name;
         this._id = id;
         this.nodes = nodes;
         SoftwareComponent.idCount++;
+        this._color = this.calcColor();
     }
 
-    
 
-  
+
+
 
     /**
      * @returns all the nodes each containing an operation of this software component.
@@ -58,7 +60,7 @@ export class SoftwareComponent implements ISoftwareComponent{
     public get id(): number {
         return this._id;
     }
-    
+
 
     /**
      * @returns the name of this software component.
@@ -72,6 +74,64 @@ export class SoftwareComponent implements ISoftwareComponent{
      */
     public set name(value: string) {
         this._name = value;
+    }
+
+    public getColor(): string {
+        return this._color;
+    }
+
+
+    private calcColor(): string {
+        switch (this.id % 15) {
+            case 0:
+                return 'red';
+                break;
+            case 1:
+                return 'orange';
+                break;
+            case 2:
+                return 'yellow';
+                break;
+            case 3:
+                return 'pink';
+                break;
+            case 4:
+                return 'blue';
+                break;
+            case 5:
+                return 'red-dark';
+                break;
+            case 6:
+                return 'orange-dark';
+                break;
+            case 7:
+                return 'yellow-dark';
+                break;
+            case 8:
+                return 'pink-dark';
+                break;
+            case 9:
+                return 'blue-dark';
+                break;
+            case 10:
+                return 'red-light';
+                break;
+            case 11:
+                return 'orange-light';
+                break;
+            case 12:
+                return 'yellow-light';
+                break;
+            case 13:
+                return 'pink-light';
+                break;
+            case 14:
+                return 'blue-light';
+                break;
+            default:
+                return 'primary';
+                break;
+        }
     }
 
 

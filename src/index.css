@@ -17,6 +17,29 @@ code {
     --color-secondary: #F3F2F1;
     --color-tertiary: #D2D0CE;
     --color-quaternary: #A19F9D;
+
+    --color-red-light: #F20732;
+    --color-red: #F20505;
+    --color-red-dark: #590202;
+
+
+    --color-orange-light: #F2BE22;
+    --color-orange: orange;
+    --color-orange-dark: #F27127;
+
+
+    --color-yellow-light: #F2E205;
+    --color-yellow: #F2CF1D;
+    --color-yellow-dark: #F29F05;
+
+
+    --color-pink-light: #F23D3D;
+    --color-pink: #F27781;
+    --color-pink-dark: #BF213E;
+
+    --color-blue-light: #056CF2;
+    --color-blue: #0439D9;
+    --color-blue-dark: #07038C;
    
 }
 
@@ -37,6 +60,29 @@ code {
         --color-reveal-highlight-center: rgba(255, 255, 255, 0);
         --font-family: '-apple-system, BlinkMacSystemFont, "Segoe UI Webfont", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif';
         
+
+        --color-red-light: #CA5010;
+        --color-red: #B1470E;
+        --color-red-dark: #79310A;
+
+
+        --color-orange-light: #E1966D;
+        --color-orange: #D67540;
+        --color-orange-dark: #CF6024;
+
+
+        --color-yellow-light: #F8955C;
+        --color-yellow: #F7894A;
+        --color-yellow-dark: #DA7941;
+
+
+        --color-pink-light: #8C90F4;
+        --color-pink: #7A7FEA;
+        --color-pink-dark: #6264A7;
+
+        --color-blue-light: #2899F5;
+        --color-blue: #0078D4;
+        --color-blue-dark: #004C87;
     }
 }
 

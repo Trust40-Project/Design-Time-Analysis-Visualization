@@ -26,7 +26,9 @@ type DataContainerProps={
     /**
      * When hovering over a data tile the corresponding node is supposed to be highlighted.
      */
-    onHoverNodeChange: (nodeId: (number|undefined)) => void
+    onHoverNodeChange: (nodeId: (number|undefined)) => void,
+    drawBorderRevealHighlight: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
+    removeBorderRevealHighlight: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void,
 }
 /**
  * DataContainer is a wrapper class containing on column of DataTile 
@@ -52,7 +54,7 @@ export class DataContainer extends React.Component<DataContainerProps>{
         );
 
         return(
-            <div onMouseLeave={(e: React.MouseEvent<HTMLElement, MouseEvent>) => this.props.revealEffectService.removeBorderRevealHighlight(e)} onMouseMove={(e: React.MouseEvent<HTMLElement, MouseEvent>) => this.props.revealEffectService.drawBorderRevealHighlight(e)} className='dataContainer'>
+            <div onMouseLeave={(e: React.MouseEvent<HTMLElement, MouseEvent>) => this.props.removeBorderRevealHighlight(e)} onMouseMove={(e: React.MouseEvent<HTMLElement, MouseEvent>) => this.props.drawBorderRevealHighlight(e)} className='dataContainer'>
                 <h5 className="titleName">{this.props.titleName}</h5>
                 <div className='dataTilesContainer'>
                         {dataTiles}

@@ -29,7 +29,6 @@
     border-radius: 5px;
     background-color: transparent;
     background-color: var(--color-primary);
-    background-color: orange;
     overflow: hidden;
     transition: box-shadow 0.5s;
 }
@@ -45,7 +44,6 @@
     border-radius: 5px;
     background-color: transparent;
     background-color: var(--color-primary);
-    background-color: orange;
     overflow: hidden;
 }
 
