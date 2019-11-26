@@ -10,11 +10,7 @@
 .edge:hover{
     cursor: pointer;
 }
-/*
-.edgeAnimation {
-    stroke-dasharray: 2;
-    animation: dash 250s linear infinite;
-}*/
+
 
 .edgeAnimation{
     stroke: var(--color-border);

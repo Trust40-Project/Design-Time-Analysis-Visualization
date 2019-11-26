@@ -7,20 +7,39 @@ import { anchorFactory, IAnchor, IAnchorPosition } from '../Models/Position/Anch
 import { Node } from '../Node/Node';
 
 type EdgeProps = {
+    /**
+     * Where the edge is supposed to start on the screen.
+     */
     from: IPosition,
+    /**
+     * Where the edge is supposed to end on the screen.
+     */
     to: IPosition,
-    nodeWidth: number,
-    nodeHeight: number,
+    /**
+     * For react to keep track of changes.
+     */
     key: number,
+    /**
+     * Callback to globally turn edge animation on and off.
+     */
     onEdgeAnimationToggle: () => void,
+    /**
+     * Whether or not to animate this edge.
+     */
     edgeAnimationOn: boolean
 
 }
 
-const Edge: React.FC<EdgeProps> = ({ from, to, nodeWidth, nodeHeight, onEdgeAnimationToggle, edgeAnimationOn }) => {
+/**
+ * A directed edge visually connects two nodes. 
+ * Either with or without an animation.
+ * @param param0 the edge props for this edge.
+ * @see EdgeProps
+ * @author Malte Reimann
+ */
+const Edge: React.FC<EdgeProps> = ({ from, to, onEdgeAnimationToggle, edgeAnimationOn }) => {
 
 
-    //const anchorPositions = getAnchorDirections(from, to, nodeWidth, nodeHeight);
     const points = getArrowPathPoints(from, to, 4);
     return (
 
@@ -35,8 +54,7 @@ const Edge: React.FC<EdgeProps> = ({ from, to, nodeWidth, nodeHeight, onEdgeAnim
             <polyline onClick={onEdgeAnimationToggle} className={edgeAnimationOn ? "edge edgeAnimation" : "edge"} points={points} />
         </svg>
     );
-    /**            <path onClick={onEdgeAnimationToggle} className={edgeAnimationOn ? "edge edgeAnimation" : "edge"} style={{ zIndex: 0 }} d={"M " + (from.x) + " " + (from.y) + " L " + (to.x) + " " + (to.y)} stroke="var(--color-border)" strokeWidth="0.4" strokeLinecap="round" fill="none" ></path>
-     */
+    
 
 
 }
@@ -46,11 +64,17 @@ const Edge: React.FC<EdgeProps> = ({ from, to, nodeWidth, nodeHeight, onEdgeAnim
 export default Edge;
 
 
-function getAnchorDirections(from: IPosition, to: IPosition, width: number, height: number): IAnchorPosition {
-    const anchor: IAnchor = anchorFactory(from, to, width, height);
-    return anchor.getAnchorPositions();
-}
 
+/**
+ * Calculates points on the edge line with a certain display.
+ * The points can be used to display arrow heads at.
+ * @param from where the line starts.
+ * @param to where the line goes to.
+ * @param distance in between two points.
+ * @retunrs the points in a string rady to use with svg polyline points.
+ * 
+ * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Element/marker
+ */
 function getArrowPathPoints(from: IPosition, to: IPosition, distance: number): string {
     let result: string = from.x + ',' + from.y;
     let lambda: number = 0;

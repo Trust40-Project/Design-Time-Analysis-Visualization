@@ -17,6 +17,7 @@ import { RevealEffectService } from '../RevealEffect/RevealEffectService';
 import { getId } from '@uifabric/utilities';
 import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
+
 type NodeProps = {
     node: INode<number, IOperation>,
     key: number,
@@ -32,12 +33,18 @@ type NodeProps = {
 
 }
 
+/**
+ * The state of a node defines its width and height dependent on whether or not it is selected.
+ */
 type NodeState  = {
     width: number,
     height: number,
 }
 
-
+/**
+ * Represents a datum node.
+ * @author Malte Reimann
+ */
 export class Node extends React.Component<NodeProps, NodeState> {
     private readonly revealEffectService: RevealEffectService = new RevealEffectService();
     private nodeBorder: HTMLElement|null = null;
@@ -54,8 +61,6 @@ export class Node extends React.Component<NodeProps, NodeState> {
         this.removeBorderRevealHighlight = this.removeBorderRevealHighlight.bind(this);
         this.drawRevealHighlight = this.drawRevealHighlight.bind(this);
         this.removeRevealHighlight = this.removeRevealHighlight.bind(this);
-        //this.handleClickRipple = this.handleClickRipple.bind(this);
-        console.dir(this.props.nodeRevealEffectService);
 
     }
 
@@ -63,8 +68,6 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const nodeBorder = document.getElementById('node-border-'+this.props.node.id);
         if(nodeBorder){
             event.target = nodeBorder; 
-            //this.revealEffectService.drawBorderRevealHighlight(event);
-           // RevealEffectService.getRevealEffectService().drawBorderRevealHighlight(event);
             this.props.nodeRevealEffectService.drawBorderRevealHighlight(event);
         }
     }
@@ -73,7 +76,6 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const nodeBorder = document.getElementById('node-border-'+this.props.node.id);
         if(nodeBorder){
             event.target = nodeBorder; 
-           // RevealEffectService.getRevealEffectService().removeReveal(event);
            this.revealEffectService.removeBorderRevealHighlight(event);
            this.props.nodeRevealEffectService.removeBorderRevealHighlight(event);
 
@@ -84,8 +86,6 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const nodeContainer = document.getElementById('node-container-'+this.props.node.id);
         if(nodeContainer){
             event.target = nodeContainer; 
-            //RevealEffectService.getRevealEffectService().addRevealHighlight(event);
-            //this.revealEffectService.addRevealHighlight(event);
             this.props.nodeRevealEffectService.addRevealHighlight(event);
         }
     }
@@ -94,35 +94,19 @@ export class Node extends React.Component<NodeProps, NodeState> {
         const nodeContainer = document.getElementById('node-container-'+this.props.node.id);
         if(nodeContainer){
             event.target = nodeContainer; 
-            //RevealEffectService.getRevealEffectService().removeReveal(event);
-            //this.revealEffectService.removeReveal(event);
             this.props.nodeRevealEffectService.removeReveal(event);
         }
     }
 
     handleSelectedNodeChange(selectedNodeId:number, event:React.MouseEvent<HTMLElement, MouseEvent>) {
-       /* const button =document.getElementById('node-button-'+this.props.node.id);
-        if(button){
-            event.target = button;
-                    this.handleClickRipple(event);
-
-        }
-        */
+       
        this.props.onSelectedNodeChange(selectedNodeId);
 
-      // this.props.onSelectedNodeChange(this.props.node.id);
        this.removeRevealHighlight(event);
        this.removeBorderRevealHighlight(event);
        
     }
-/*
-    handleClickRipple(event:React.MouseEvent<HTMLButtonElement,MouseEvent>){
-       /* if(this.props.onClickRipple){
-            this.props.onClickRipple(event);
-        }*//*
-        RevealEffectService.getRevealEffectService().handleClickRipple(event);
-    }
-*/
+
 
     componentDidUpdate(prevProps: Readonly<NodeProps>, prevState: Readonly<NodeState>) {
         if (prevProps.isSelected !== this.props.isSelected) {
@@ -135,10 +119,10 @@ export class Node extends React.Component<NodeProps, NodeState> {
     }
 
     componentDidMount(){
-       // const nodeBorder: HTMLElement|null = document.querySelector('node-border-'+this.props.node.id);
-     
         if(this.nodeBorder){
-            /*this.revealEffectService.addBorderElement(this.nodeBorder);*/
+            /**
+             * Register the border of this node to add reveal effect to it on hover.
+             */
             this.props.nodeRevealEffectService.addBorderElement(this.nodeBorder);
         }
     }
@@ -157,9 +141,7 @@ export class Node extends React.Component<NodeProps, NodeState> {
             <Edge 
                 from={layout.getNodePosition(value.fromId)}
                 to={layout.getNodePosition(value.toId)}
-                key={value.data.id}
-                nodeWidth={this.state.width}
-                nodeHeight={this.state.height}   
+                key={value.data.id}  
                 onEdgeAnimationToggle={this.props.onEdgeAnimationToggle} 
                 edgeAnimationOn={this.props.edgeAnimationOn}
             ></Edge>
@@ -187,26 +169,13 @@ export class Node extends React.Component<NodeProps, NodeState> {
 
         );
 
-        /*
-        <section>            
-                <div className="nodeArea" style={{ top: leftTopCorner.y + 'em', left: leftTopCorner.x + 'em' }}>
-                <button tabIndex={node.id} onClick={this.handleSelectedNodeChange} className={cssClass + ' blur border'} >
-                        {this.renderNodeContent()}
-                </button>
-                
-            </div>
-            {toDisplay}
-            </section>
-            */
-        /*
-        return (
-            /**width: Node.width + 'vw', height: Node.height + 'vh', top: leftTopCorner.y + 'vh', left: leftTopCorner.x + 'vw'*/
-        /**<div className='node' style={{gridColumn: position.x+'/'+(position.x+1), gridRow: position.y + '/'+(position.y +1) }}>{node.data.name}</div>*/
-        /*
-                );*/
+       
     }
 
-    renderNodeTitle(){
+    /**
+     * @returns the title for this node in the right size.
+     */
+    private renderNodeTitle(): JSX.Element{
         if(!this.props.isSelected){
             return <p>{this.props.node.data.name}</p>
         } else {
@@ -215,7 +184,11 @@ export class Node extends React.Component<NodeProps, NodeState> {
     }
 
 
-    renderNodeContent() {
+
+    /**
+     * @returns the content to render within the node depending on the selected state of this node.
+     */
+    private renderNodeContent(): (JSX.Element|null) {
         const node: INode<number, IOperation> = this.props.node;
 
         if (!this.props.isSelected) {
@@ -237,17 +210,7 @@ export class Node extends React.Component<NodeProps, NodeState> {
                 </div>
 
             );
-            /**
-             * <div className='nodeContainer'>
-                    <header className='nodeTitle'>
-                        <h2>{node.data.name}</h2>
-                    </header>
-                    <div className='nodeContent'>
-                        <DataContainer isInput={true} onSelectedNodeChange={this.props.onSelectedNodeChange} links={input}></DataContainer>
-                        <DataContainer isInput={false} onSelectedNodeChange={this.props.onSelectedNodeChange} links={output}></DataContainer>
-                    </div>
-                </div>
-             */
+           
         }
     }
 }

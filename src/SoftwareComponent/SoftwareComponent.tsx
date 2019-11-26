@@ -25,9 +25,17 @@ type SoftwareComponentProps = {
     revealEffectService: RevealEffectService
 }
 
+/**
+ * A component representing a part of a software system that is grouped together.
+ * @see ISoftwareComponent
+ * @author Malte Reimann
+ */
 export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
     
-    renderNodes() {
+    /**
+     * @returns all the node components to display in this software component.
+     */
+    renderNodes(): JSX.Element[] {
         const component = this.props.component;
        const layout = this.props.layout;
        const graph = this.props.graph;
@@ -50,19 +58,8 @@ export class SoftwareComponent extends React.Component<SoftwareComponentProps>{
 
         return nodes;
     }
-/*
-    renderEdges(){
-       const edges = this.props.component.edges.map((value: IEdge, index: number, array: IEdge[]) =>
-           <Edge datum={value} key={value.id}></Edge>
-       );
-       return edges;
-    }*/
+
     render(){
-       // const edges = this.renderEdges();
-       /*return <RevealEffect 
-        childrenToRender={this.renderNodes()}
-        ></RevealEffect>*/
         return this.renderNodes();
-        
     }
 }
