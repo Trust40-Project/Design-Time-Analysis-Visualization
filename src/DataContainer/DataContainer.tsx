@@ -13,10 +13,15 @@ type DataContainerProps={
     revealEffectService: RevealEffectService,
     onHoverNodeChange: (nodeId: (number|undefined)) => void
 }
+/**
+ * DataContainer is a wrapper class containing on column of DataTile 
+ * @see DataTile
+ */
 export class DataContainer extends React.Component<DataContainerProps>{
 
     constructor(props: DataContainerProps){
         super(props);
+        
     }
 
    

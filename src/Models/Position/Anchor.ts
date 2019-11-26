@@ -1,6 +1,7 @@
 import { IPosition } from "./IPosition";
 import { Position } from "./Position";
 
+//TODO: delete
 export interface IAnchorPosition{
     from:IPosition,
     to: IPosition
